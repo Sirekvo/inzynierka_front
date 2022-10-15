@@ -1,0 +1,126 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">{{'Forms.ListTitle' | translate}}</div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-4 offset-md-8">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                        </div>
+                        <input type="text" class="form-control" [(ngModel)]="searchTerm"
+                               placeholder="{{'Forms.Search' | translate}}"/>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-hover table-responsive-md"
+                   #mf="mfDataTable"
+                   [mfData]="forms | formSearch:searchTerm"
+                   [mfRowsOnPage]="10"
+                   mfSortBy="updatedOn"
+                   mfSortOrder="desc">
+                <thead>
+                <tr>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="name">{{'Forms.Name' | translate}}</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="title">{{'Forms.Title' | translate}}</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="subtitle">{{'Forms.SubtitleList' | translate}}</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%">
+                        <mfDefaultSorter by="status">{{'Forms.Status' | translate}}</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="updatedOn">{{'Forms.ListDate' | translate}}</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let form of mf.data">
+                    <td (click)="onEditClick(form.id)" style="cursor: pointer">
+                        <i *ngIf="form.isDefault" class="icon-star mr-2"></i>
+                        <span>{{form.name ? form.name : '–'}}</span>
+                    </td>
+                    <td>{{form.title ? form.title : '–'}}</td>
+                    <td>{{form.subtitle ? form.subtitle : '–'}}</td>
+                    <td>
+                        <app-form-status [status]="form.status"></app-form-status>
+                    </td>
+                    <td>{{form.updatedOn | dateAgo}}</td>
+                    <td>
+                        <div class="btn-group mr-4" dropdown>
+                            <button (click)="onEditClick(form.id)"
+                                    class="btn btn-outline-primary"
+                                    type="button">{{'Forms.MenuEdit' | translate}}</button>
+                            <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                                    type="button"
+                                    dropdownToggle
+                                    name="dropdown"><span class="caret"></span>
+                            </button>
+                            <div *dropdownMenu class="dropdown-menu" role="menu">
+                                <a class="dropdown-item"
+                                   (click)="onEditClick(form.id)">
+                                    <i class="fa fa-pencil"></i>{{'Forms.MenuEdit' | translate}}
+                                </a>
+                                <a *ngIf="form.status === 'Inactive'" class="dropdown-item"
+                                   (click)="onChangeStatus(form, 'Active')">
+                                    <i class="fa fa-check"></i>{{'Forms.MenuMakeActive' | translate}}
+                                </a>
+                                <a *ngIf="form.status === 'Active'" class="dropdown-item"
+                                   (click)="onChangeStatus(form, 'Inactive')">
+                                    <i class="fa fa-ban"></i>{{'Forms.MenuMakeInactive' | translate}}
+                                </a>
+                                <a *ngIf="!form.isDefault" class="dropdown-item"
+                                   (click)="onSetDefault(form)">
+                                    <i class="fa fa-star-o"></i>{{'Forms.MenuSetDefault' | translate}}
+                                </a>
+                                <a class="dropdown-item"
+                                   (click)="onDeleteClick(form.id)">
+                                    <i class="fa fa-trash-o"></i>{{'Forms.MenuDelete' | translate}}
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="forms !== undefined && !mf.data.length">
+                    <td colspan="6" class="text-center py-4">
+                        <h5>{{'Forms.NoForms' | translate}}</h5>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,30]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<app-warning-modal (closed)="isWarningOpen = false"
+                   (confirmed)="onDeleteConfirmed()"
+                   *ngIf="isWarningOpen"
+                   body="{{'Forms.DeleteFormConfirmationBody' | translate}}"
+                   no="{{'Forms.DeleteFormConfirmationClose' | translate}}"
+                   title="{{'Forms.DeleteFormConfirmationTitle' | translate}}"
+                   yes="{{'Forms.DeleteFormConfirmationYes' | translate}}"></app-warning-modal>
+
+<app-form-edit *ngIf="isEditOpen"
+               [mode]="'New'"
+               (closed)="isEditOpen = false"></app-form-edit>
+
+<ng-template #buttonBarTemplate>
+    <div class="btn-group-sm pull-right"
+         role="group">
+        <button (click)="this.isEditOpen = true"
+                class="btn btn-block btn-success btn-sm"
+                type="button">{{'Forms.CreateButton' | translate}}</button>
+    </div>
+</ng-template>
