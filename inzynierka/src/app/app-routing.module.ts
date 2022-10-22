@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IndexBlogComponent } from './core/components/index-blog/index-blog.component';
 
-import { SwitcherComponent } from './shared/switcher/switcher.component';
 
 import { combineLatest } from 'rxjs/internal/operators';
 import {MasterPageComponent} from "./core/components/master-page/master-page.component";
@@ -16,7 +15,6 @@ const routes: Routes = [
     children: [
       { path: '', component: IndexBlogComponent },
       { path: 'page-blog-detail', component: PageBlogDetailComponent},
-      { path: '#', component: SwitcherComponent },
     ]
   },
 

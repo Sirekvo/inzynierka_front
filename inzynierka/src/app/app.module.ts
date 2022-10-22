@@ -29,7 +29,6 @@ import { FeatherModule } from 'angular-feather';
 
 import { allIcons } from 'angular-feather/icons';
 import { FooterComponent } from './shared/footer/footer.component';
-import { SwitcherComponent } from './shared/switcher/switcher.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MasterPageComponent} from "./core/components/master-page/master-page.component";
 import {PageBlogDetailComponent} from "./core/components/page-blog-detail/page-blog-detail.component";
@@ -53,7 +52,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AppComponent,
     FooterComponent,
     IndexBlogComponent,
-    SwitcherComponent,
   ],
   imports: [
     BrowserModule,
