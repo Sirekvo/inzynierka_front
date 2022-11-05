@@ -7,6 +7,7 @@ import { IndexBlogComponent } from './core/components/index-blog/index-blog.comp
 import { combineLatest } from 'rxjs/internal/operators';
 import {MasterPageComponent} from "./core/components/master-page/master-page.component";
 import {PageBlogDetailComponent} from "./core/components/page-blog-detail/page-blog-detail.component";
+import {AuthLoginComponent} from "./auth/auth-login/auth-login.component";
 
 const routes: Routes = [
   {
@@ -17,8 +18,8 @@ const routes: Routes = [
       { path: 'page-blog-detail', component: PageBlogDetailComponent},
     ]
   },
+  {path: 'login', component: AuthLoginComponent},
 
-  //{ path: 'auth-login', component: AuthLoginComponent },
 
 
 ];

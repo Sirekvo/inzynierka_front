@@ -35,6 +35,10 @@ import {PageBlogDetailComponent} from "./core/components/page-blog-detail/page-b
 import {PageBlogListSidebarComponent} from "./core/components/page-blog-list-sidebar/page-blog-list-sidebar.component";
 import {PageBlogSidebarComponent} from "./core/components/page-blog-sidebar/page-blog-sidebar.component";
 import {PageBlogListComponent} from "./core/components/page-blog-list/page-blog-list.component";
+import {AuthLoginComponent} from "./auth/auth-login/auth-login.component";
+import {UserService} from "./shared/services/user.service";
+import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
+import {HttpClientModule} from "@angular/common/http";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -49,6 +53,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     PageBlogListSidebarComponent,
     PageBlogSidebarComponent,
     PageBlogListComponent,
+    AuthLoginComponent,
     AppComponent,
     FooterComponent,
     IndexBlogComponent,
@@ -72,6 +77,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgxTypedJsModule,
     FlatpickrModule.forRoot(),
     CountToModule,
+    HttpClientModule,
     NgxMasonryModule,
     LightboxModule,
     SharedModule
@@ -82,12 +88,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [
-    {
-      provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    },
-  ],
+  providers: [AuthInterceptorProvider, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
