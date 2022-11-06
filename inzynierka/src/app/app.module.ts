@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LightboxModule } from 'ngx-lightbox';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +39,13 @@ import {AuthLoginComponent} from "./auth/auth-login/auth-login.component";
 import {UserService} from "./shared/services/user.service";
 import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
 import {HttpClientModule} from "@angular/common/http";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {ImageComponent} from "./core/components/images/image/image.component";
+import {ImageListComponent} from "./core/components/images/image-list/image-list.component";
+import {ImagesComponent} from "./core/components/images/images.component";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -57,6 +64,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AppComponent,
     FooterComponent,
     IndexBlogComponent,
+    ImagesComponent,
+    ImageComponent,
+    ImageListComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +90,11 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HttpClientModule,
     NgxMasonryModule,
     LightboxModule,
-    SharedModule
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    ReactiveFormsModule,
   ],
   exports: [
     FeatherModule,

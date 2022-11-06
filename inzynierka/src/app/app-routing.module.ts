@@ -8,6 +8,9 @@ import { combineLatest } from 'rxjs/internal/operators';
 import {MasterPageComponent} from "./core/components/master-page/master-page.component";
 import {PageBlogDetailComponent} from "./core/components/page-blog-detail/page-blog-detail.component";
 import {AuthLoginComponent} from "./auth/auth-login/auth-login.component";
+import {ImageComponent} from "./core/components/images/image/image.component";
+import {ImageListComponent} from "./core/components/images/image-list/image-list.component";
+import {ImagesComponent} from "./core/components/images/images.component";
 
 const routes: Routes = [
   {
@@ -19,7 +22,10 @@ const routes: Routes = [
     ]
   },
   {path: 'login', component: AuthLoginComponent},
-
+  {path: 'image', component: ImagesComponent,children:[
+      {path:'upload', component: ImageComponent},
+      {path:'list', component: ImageListComponent}
+    ]},
 
 
 ];
