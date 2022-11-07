@@ -19,7 +19,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CountToModule } from 'angular-count-to';
 import { NgxMasonryModule } from 'ngx-masonry';
 
-import { SharedModule } from "./shared/shared.module";
+
 
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -46,6 +46,8 @@ import {environment} from "../environments/environment";
 import {ImageComponent} from "./core/components/images/image/image.component";
 import {ImageListComponent} from "./core/components/images/image-list/image-list.component";
 import {ImagesComponent} from "./core/components/images/images.component";
+import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
+import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -57,6 +59,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   declarations: [
     MasterPageComponent,
     PageBlogDetailComponent,
+    PageBlogDetailTwoComponent,
     PageBlogListSidebarComponent,
     PageBlogSidebarComponent,
     PageBlogListComponent,
@@ -67,6 +70,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ImagesComponent,
     ImageComponent,
     ImageListComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HttpClientModule,
     NgxMasonryModule,
     LightboxModule,
-    SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,

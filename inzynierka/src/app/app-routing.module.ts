@@ -11,6 +11,8 @@ import {AuthLoginComponent} from "./auth/auth-login/auth-login.component";
 import {ImageComponent} from "./core/components/images/image/image.component";
 import {ImageListComponent} from "./core/components/images/image-list/image-list.component";
 import {ImagesComponent} from "./core/components/images/images.component";
+import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
+import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
 
 const routes: Routes = [
   {
@@ -22,6 +24,8 @@ const routes: Routes = [
     ]
   },
   {path: 'login', component: AuthLoginComponent},
+  {path: 'admin', component: AdminPanelComponent},
+  {path: 'post-creator', component: PageBlogDetailTwoComponent},
   {path: 'image', component: ImagesComponent,children:[
       {path:'upload', component: ImageComponent},
       {path:'list', component: ImageListComponent}
