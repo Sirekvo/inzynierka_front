@@ -48,6 +48,7 @@ import {ImageListComponent} from "./core/components/images/image-list/image-list
 import {ImagesComponent} from "./core/components/images/images.component";
 import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
 import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
+import {PostService} from "./shared/services/post.service";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -70,7 +71,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ImagesComponent,
     ImageComponent,
     ImageListComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +106,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [AuthInterceptorProvider, UserService],
+  providers: [AuthInterceptorProvider, UserService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

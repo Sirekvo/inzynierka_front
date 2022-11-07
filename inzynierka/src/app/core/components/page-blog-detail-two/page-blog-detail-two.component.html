@@ -7,11 +7,6 @@
           <div class="col-lg-12 form-group">
             <H1> Dodawanie nowego postu </H1>
           </div>
-<!--          <ul class="list-unstyled mt-4">-->
-<!--            <li class="list-inline-item h6 user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>-->
-<!--            <li class="list-inline-item h6 date text-muted"><i class="mdi mdi-calendar-check"></i> 13th August, 2019-->
-<!--            </li>-->
-<!--          </ul>-->
         </div>
       </div>
       <!--end col-->
@@ -26,13 +21,15 @@
 <!-- Blog STart -->
 <section class="section">
   <div class="container">
-
+    <form id="creatorForm" #f="ngForm" (submit)="onSubmit(f)">
       <div class="row">
 
         <!-- BLog Start -->
         <div class="col-lg-8 col-md-6">
           <div class="card blog blog-detail border-0 shadow rounded">
-            <img [src]="imgSrc" class="img-fluid rounded-top" alt="">
+            <img [src]="imgSrc" class="img-fluid rounded-top" (click)="fileUploader.click()">
+            <label>Dodaj zdjęcie</label>
+            <input type="file" accept="image/*" class="form-control" #fileUploader name="imageUrl" ngModel (change)="showPreview($event)">
             <div class="card shadow rounded border-0 mt-4">
               <div class="card-body">
                 <h5 class="card-title mb-0">Dodaj opis :</h5>
@@ -40,7 +37,7 @@
                     <div class="col-md-12">
                       <div class="mb-3">
                         <div class="form-icon position-relative">
-                          <textarea id="message" placeholder="Dodaj opis" rows="25" formControlName="description"
+                          <textarea id="message" name="description" placeholder="Dodaj opis" rows="25"
                                     class="form-control" ngModel></textarea>
                         </div>
                       </div>
@@ -60,8 +57,8 @@
             <div class="card-body">
 
               <!-- TAG CLOUDS -->
-<!--              <form [formGroup]="formTemplate" id="tabsForm" (submit)="onSubmit(formTemplate.value)">-->
-              <div [formGroup]="formTemplate" class="widget mb-4 pb-2">
+
+              <div class="widget mb-4 pb-2">
 
                 <h5 class="widget-title">Ważne informacje o serialu</h5>
                 <div class="col-lg-12 form-group">
@@ -69,7 +66,7 @@
                     <label class="form-label">Tytuł</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" formControlName="title" class="form-control ps-5 pt-2" placeholder="Tytuł" ngModel>
+                      <input type="text" name="title" class="form-control ps-5 pt-2" placeholder="Tytuł" ngModel>
                     </div>
                   </div>
                 </div>
@@ -78,15 +75,15 @@
                     <label class="form-label">Twórca</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" formControlName="creator" class="form-control ps-5 pt-2" placeholder="Twórca" ngModel>
+                      <input type="text" name="creator" class="form-control ps-5 pt-2" placeholder="Twórca" ngModel>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="mb-3 mt-4">
+                <div class="col-lg-12">
+                  <div class="mb-3 mt-12">
                     <label class="form-label">Gatunek serialu</label>
                     <div class="position-relative">
-                      <select [(ngModel)]="genresSelected" name="genre" class="form-select form-control-lg pt-2" required>
+                      <select [(ngModel)]="genresSelected" name="genre" class="form-select form-control-lg pt-2">
                         <option *ngFor="let i of genres; let indexOfElement=index"
                                 [value]="i">{{i}}</option>
                       </select>
@@ -98,16 +95,27 @@
                     <label class="form-label">Produkcja</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" formControlName="production" class="form-control ps-5 pt-2" placeholder="Produkcja" ngModel>
+                      <input type="text" name="production" class="form-control ps-5 pt-2" placeholder="Produkcja" ngModel>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-12 form-group">
-                  <div class="mb-3 mt-4">
-                    <label class="form-label">Data</label>
+<!--                <div class="col-lg-12 form-group">-->
+<!--                  <div class="mb-3 mt-4">-->
+<!--                    <label class="form-label">Data premiery</label>-->
+<!--                    <div class="form-icon position-relative">-->
+<!--                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>-->
+<!--                      <input type="text" name="premiere" class="form-control ps-5 pt-2" placeholder="Data premiery" ngModel>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+                <div class="col-lg-12">
+                  <div class="mb-3 mt-12">
+                    <label class="form-label">Data premiery<span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
-                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" formControlName="premiere" class="form-control ps-5 pt-2" placeholder="Data" ngModel>
+                      <i-feather name="calendar" class="fea icon-sm icons d-flex"></i-feather>
+                      <input readonly class="form-control ps-5 pt-2" placeholder="yyyy-mm-dd" name="premiere"
+                             [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                             (click)="d.toggle()">
                     </div>
                   </div>
                 </div>
@@ -121,7 +129,7 @@
 
               </div>
               <!-- TAG CLOUDS -->
-<!--              </form>-->
+
             </div>
           </div>
         </div>
@@ -129,7 +137,7 @@
         <!-- END SIDEBAR -->
       </div>
       <!--end row-->
-
+    </form>
   </div>
   <!--end container-->
 </section>

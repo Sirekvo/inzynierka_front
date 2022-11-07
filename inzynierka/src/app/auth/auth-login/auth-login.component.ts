@@ -33,7 +33,7 @@ export class AuthLoginComponent implements OnInit {
         this.userService.login(form.value.email, form.value.password).subscribe(
             (data: TokenOutput) => {
                 this.userService.setLocalUser(data, form.value.remember === true);
-                console.log("DZIALA LOGOWANIE I CORSY GIT KURWAA");
+                this.router.navigate(['/admin'])
                 // if (data.firstLogin == true) {
                 //     this.router.navigate(['/starter']);
                 // } else if (data.firstLogin == false) {
