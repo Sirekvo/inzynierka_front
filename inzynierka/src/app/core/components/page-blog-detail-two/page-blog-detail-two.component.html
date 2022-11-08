@@ -27,9 +27,11 @@
         <!-- BLog Start -->
         <div class="col-lg-8 col-md-6">
           <div class="card blog blog-detail border-0 shadow rounded">
-            <img [src]="imgSrc" class="img-fluid rounded-top" (click)="fileUploader.click()">
-            <label>Dodaj zdjęcie</label>
-            <input type="file" accept="image/*" class="form-control" #fileUploader name="imageUrl" ngModel (change)="showPreview($event)">
+            <img [src]="downloadUrl" class="img-fluid rounded-top">
+            <div class="mt-4">
+              <input type="file" (change)="handleFiles($event)" accept="*.png.jpg.jpeg">
+              <button class="btn btn-primary" >Dodaj zdjęcie wyróżniające</button>
+            </div>
             <div class="card shadow rounded border-0 mt-4">
               <div class="card-body">
                 <h5 class="card-title mb-0">Dodaj opis :</h5>

@@ -42,17 +42,17 @@ export class ImageComponent implements OnInit {
   }
   onSubmit(formValue){
     this.isSubmitted = true;
-    var filePath = `${formValue.category}/${this.selectedImage.name}_${new Date().getTime()}`;
-    const fileRef = this.storage.ref(filePath);
-    this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
-        finalize(()=>{
-          fileRef.getDownloadURL().subscribe((url)=>{
-            formValue['imageUrl']=url;
-            this.service.insertImageDatails(formValue);
-            this.resetForm();
-          })
-        })
-    ).subscribe();
+    // var filePath = `${formValue.category}/${this.selectedImage.name}_${new Date().getTime()}`;
+    // const fileRef = this.storage.ref(filePath);
+    // this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
+    //     finalize(()=>{
+    //       fileRef.getDownloadURL().subscribe((url)=>{
+    //         formValue['imageUrl']=url;
+    //         this.service.insertImageDatails(formValue);
+    //         this.resetForm();
+    //       })
+    //     })
+    // ).subscribe();
   }
   resetForm(){
     this.formTemplate.reset();

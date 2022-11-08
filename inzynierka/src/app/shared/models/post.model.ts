@@ -6,6 +6,7 @@ export class PostInput {
     production : string;
     premiere : string;
     description : string;
+    imageUrl : string;
 }
 export class PostOutput {
     title : string;

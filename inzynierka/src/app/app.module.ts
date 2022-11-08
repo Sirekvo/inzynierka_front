@@ -47,7 +47,10 @@ import {ImageComponent} from "./core/components/images/image/image.component";
 import {ImageListComponent} from "./core/components/images/image-list/image-list.component";
 import {ImagesComponent} from "./core/components/images/images.component";
 import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
-import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
+import {
+  NgbdModalConfirm,
+  PageBlogDetailTwoComponent
+} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
 import {PostService} from "./shared/services/post.service";
 
 
@@ -72,6 +75,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ImageComponent,
     ImageListComponent,
     AdminPanelComponent,
+    NgbdModalConfirm,
   ],
   imports: [
     BrowserModule,
