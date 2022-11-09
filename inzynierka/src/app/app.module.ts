@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA, Pipe} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LightboxModule } from 'ngx-lightbox';
 
@@ -52,6 +52,8 @@ import {
   PageBlogDetailTwoComponent
 } from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
 import {PostService} from "./shared/services/post.service";
+import {BlogComponent} from "./shared/blog/blog.component";
+import {NgPipesModule} from "ngx-pipes";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -76,6 +78,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ImageListComponent,
     AdminPanelComponent,
     NgbdModalConfirm,
+    BlogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -103,6 +107,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     ReactiveFormsModule,
+    NgPipesModule
   ],
   exports: [
     FeatherModule,

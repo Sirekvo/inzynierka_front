@@ -30,7 +30,7 @@
             <img [src]="downloadUrl" class="img-fluid rounded-top">
             <div class="mt-4">
               <input type="file" (change)="handleFiles($event)" accept="*.png.jpg.jpeg">
-              <button class="btn btn-primary" >Dodaj zdjęcie wyróżniające</button>
+              <button type="button" class="btn btn-primary" (click) = uploadImages()>Dodaj zdjęcie wyróżniające</button>
             </div>
             <div class="card shadow rounded border-0 mt-4">
               <div class="card-body">

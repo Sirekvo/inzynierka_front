@@ -140,6 +140,7 @@ export class PageBlogDetailTwoComponent implements OnInit {
   isSubmitted : boolean;
   model: NgbDateStruct;
   date = new Date();
+  check = true;
 
   genres: Array<string> = ['Komedia', 'Dramat', 'Romantyczny', 'Science fiction', 'Kryminalny', 'Fantasy', 'Wojenny', 'Horror'];
   genresSelected = this.genres[0];
@@ -153,7 +154,7 @@ export class PageBlogDetailTwoComponent implements OnInit {
   postCounter: number;
   lastPostId: number[];
   imageUrl: string;
-  downloadUrl = '';
+  downloadUrl: string;
   upload: Upload;
   task: AngularFireUploadTask;
 
@@ -177,8 +178,8 @@ export class PageBlogDetailTwoComponent implements OnInit {
     const fileRef = this.af.ref(filePath);
     // this.af.upload("/files"+Math.random()+this.imgSrc,this.imgSrc)
     this.task = this.af.upload(filePath, this.imgSrc);
-    (await this.task).ref.getDownloadURL().then(url => {this.downloadUrl = url
-      console.log(this.downloadUrl);
+    (await this.task).ref.getDownloadURL().then(url => {
+      this.downloadUrl = url
     });
     // task.snapshotChanges().pipe(
     //     finalize(() => {
@@ -193,7 +194,6 @@ export class PageBlogDetailTwoComponent implements OnInit {
     //     })
     // ).subscribe();
     // console.log(this.files);
-    console.log(this.downloadUrl);
   }
   handleFiles($event){
     this.imgSrc = $event.target.files[0];
@@ -201,7 +201,8 @@ export class PageBlogDetailTwoComponent implements OnInit {
     console.log(file);
 
   }
-  async onSubmit(form: any) {
+  // async onSubmit(form: any) {
+   onSubmit = async (form: any) =>{
     console.log(form.value.creator);
     console.log(form.value.title);
     console.log(form.value.description);
@@ -211,26 +212,50 @@ export class PageBlogDetailTwoComponent implements OnInit {
     const new_date = form.value.premiere.year + "-" + form.value.premiere.month + "-" + form.value.premiere.day;
     console.log(new_date);
 
-    const filePath = `Images/${this.imgSrc['name']}`;
-    console.log(filePath);
-    const fileRef = this.af.ref(filePath);
+    // const filePath = `Images/${this.imgSrc['name']}`;
+    // console.log(filePath);
+    // const fileRef = this.af.ref(filePath);
+    // fileRef.put(filePath);
+    // TaskSnapshot
+
     // this.af.upload("/files"+Math.random()+this.imgSrc,this.imgSrc)
+    // this.task = this.af.upload(filePath, this.imgSrc);
+    // fileRef.getDownloadURL().subscribe(url => {
+    //   this.downloadUrl = url
+    //   console.log(this.downloadUrl);
+    //
+    // });
 
-    fileRef.getDownloadURL().subscribe(url => {
-      this.downloadUrl = url
-      console.log(this.downloadUrl);
-    });
+     // this.downloadUrl = await fileRef.getDownloadURL().toPromise()
 
-    this.postService.createPost(form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl).subscribe(
-        (response: any) => {
-          this.task = this.af.upload(filePath, this.imgSrc);
-          console.log("przeszlo!");
-          this.resetForm();
-        },
-        () => {
+     while(this.check == true){
+       if(this.downloadUrl != '')
+       {
+         this.check=false;
 
-        }
-    );
+         console.log('usunieto');
+         this.postService.createPost(form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl).subscribe(
+             (response: any) => {
+               console.log(response)
+
+               console.log("przeszlo!");
+               this.resetForm();
+               form.reset();
+             },
+             () => {
+               this.check=false;
+               this.af.refFromURL(this.downloadUrl).delete();
+             }
+         );
+
+       }
+       // console.log("puste");
+       // console.log("url:" + this.downloadUrl);
+     }
+     // else{
+     //   console.log("jest: " + this.downloadUrl)
+     // }
+
     this.isSubmitted = true;
 
     // var filePath = `${this.postList.map(t => t.series_id)[this.postList.length-1]+1}/${this.selectedImage.name}_${new Date().getTime()}`;
@@ -275,6 +300,8 @@ export class PageBlogDetailTwoComponent implements OnInit {
     this.imgSrc = "assets/images/blog/add_photo.jpg";
     this.isSubmitted = false;
     this.selectedImage = null;
+    this.downloadUrl = '';
+
 
     this.postService.getPost().subscribe(
           (post: Array<PostInput>) => {

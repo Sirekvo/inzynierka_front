@@ -19,7 +19,7 @@ export class PostService {
         return this.httpClient_withoutToken.get<Array<PostInput>>(environment.apiUrl + '/series');
     }
 
-    createPost(title: string, creator: string, genre: string, production: string, premiere: string, description: string, imageUrl: string): Observable<any> {
+    createPost(title: string, creator: string, genre: string, production: string, premiere: string, description: string, url: string): Observable<any> {
 
         const body = {
             title,
@@ -28,8 +28,10 @@ export class PostService {
             production,
             premiere,
             description,
-            imageUrl
+            url
         };
+
+        console.log(url)
 
         const httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
