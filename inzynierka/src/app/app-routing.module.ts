@@ -13,7 +13,6 @@ import {ImageListComponent} from "./core/components/images/image-list/image-list
 import {ImagesComponent} from "./core/components/images/images.component";
 import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
 import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
-import {BlogComponent} from "./shared/blog/blog.component";
 
 const routes: Routes = [
   {
@@ -31,7 +30,6 @@ const routes: Routes = [
       {path:'upload', component: ImageComponent},
       {path:'list', component: ImageListComponent}
     ]},
-  {path: 'blog', component: BlogComponent}
 
 
 ];

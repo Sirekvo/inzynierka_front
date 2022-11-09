@@ -52,8 +52,8 @@ import {
   PageBlogDetailTwoComponent
 } from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
 import {PostService} from "./shared/services/post.service";
-import {BlogComponent} from "./shared/blog/blog.component";
 import {NgPipesModule} from "ngx-pipes";
+import {BlogAdminComponent} from "./shared/blog-admin/blog-admin.component";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -78,7 +78,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ImageListComponent,
     AdminPanelComponent,
     NgbdModalConfirm,
-    BlogComponent,
+    BlogAdminComponent,
 
   ],
   imports: [

@@ -3,11 +3,11 @@ import {PostInput} from "../models/post.model";
 import {PostService} from "../services/post.service";
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+  selector: 'app-blog-admin',
+  templateUrl: './blog-admin.component.html',
+  styleUrls: ['./blog-admin.component.css']
 })
-export class BlogComponent implements OnInit { 
+export class BlogAdminComponent implements OnInit {
 
   @Input() blogData: Array<{
     image: string;
@@ -32,6 +32,15 @@ export class BlogComponent implements OnInit {
 
     );
   }
+  deletePost(id){
+    this.postService.deletePost(id).subscribe(
+        (result) => {
+          this.ngOnInit();
+        },
+    );
+  }
+
+
 
 
 }

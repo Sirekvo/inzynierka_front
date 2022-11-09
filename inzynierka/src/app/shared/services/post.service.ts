@@ -39,5 +39,14 @@ export class PostService {
 
         return this.httpClient_withoutToken.post(environment.apiUrl + '/series', body);
     }
+    deletePost(id : number): Observable<any> {
+
+
+
+        console.log(id)
+
+
+        return this.httpClient_withoutToken.delete(environment.apiUrl + '/series/' + id);
+    }
 
 }
