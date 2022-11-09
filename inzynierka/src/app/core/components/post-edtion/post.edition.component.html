@@ -1,0 +1,153 @@
+<!-- Hero Start -->
+<section class="bg-half bg-light d-table w-100" id="home">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 text-center">
+        <div class="page-next-level">
+          <div class="col-lg-12 form-group">
+            <H1> Dodawanie nowego postu </H1>
+          </div>
+        </div>
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end container-->
+</section>
+<!--end section-->
+<!-- Hero End -->
+
+<!-- Blog STart -->
+<section class="section">
+  <div class="container">
+    <form id="creatorForm" #f="ngForm" (submit)="onSubmit(f)">
+      <div class="row">
+
+        <!-- BLog Start -->
+        <div class="col-lg-8 col-md-6">
+          <div class="card blog blog-detail border-0 shadow rounded">
+            <img [src]="downloadUrl" class="img-fluid rounded-top">
+            <div class="mt-4">
+              <input type="file" (change)="handleFiles($event)" accept="*.png.jpg.jpeg">
+              <button type="button" class="btn btn-primary" (click) = uploadImages()>Dodaj zdjęcie wyróżniające</button>
+            </div>
+            <div class="card shadow rounded border-0 mt-4">
+              <div class="card-body">
+                <h5 class="card-title mb-0">Dodaj opis :</h5>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mb-3">
+                      <div class="form-icon position-relative">
+                          <textarea id="message" name="description" placeholder="Dodaj opis" rows="25"
+                                    class="form-control" ngModel></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <!--end col-->
+                </div>
+                <!--end row-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- BLog End -->
+
+        <!-- START SIDEBAR -->
+        <div class="col-lg-4 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+          <div class="card border-0 sidebar sticky-bar rounded shadow">
+            <div class="card-body">
+
+              <!-- TAG CLOUDS -->
+
+              <div class="widget mb-4 pb-2">
+
+                <h5 class="widget-title">Ważne informacje o serialu</h5>
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3 mt-4">
+                    <label class="form-label">Tytuł</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
+                      <input type="text" name="title" class="form-control ps-5 pt-2" placeholder="Tytuł" ngModel>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3 mt-4">
+                    <label class="form-label">Twórca</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
+                      <input type="text" name="creator" class="form-control ps-5 pt-2" placeholder="Twórca" ngModel>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="mb-3 mt-12">
+                    <label class="form-label">Gatunek serialu</label>
+                    <div class="position-relative">
+                      <select [(ngModel)]="genresSelected" name="genre" class="form-select form-control-lg pt-2">
+                        <option *ngFor="let i of genres; let indexOfElement=index"
+                                [value]="i">{{i}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3 mt-4">
+                    <label class="form-label">Produkcja</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
+                      <input type="text" name="production" class="form-control ps-5 pt-2" placeholder="Produkcja" ngModel>
+                    </div>
+                  </div>
+                </div>
+                <!--                <div class="col-lg-12 form-group">-->
+                <!--                  <div class="mb-3 mt-4">-->
+                <!--                    <label class="form-label">Data premiery</label>-->
+                <!--                    <div class="form-icon position-relative">-->
+                <!--                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>-->
+                <!--                      <input type="text" name="premiere" class="form-control ps-5 pt-2" placeholder="Data premiery" ngModel>-->
+                <!--                    </div>-->
+                <!--                  </div>-->
+                <!--                </div>-->
+                <div class="col-lg-12">
+                  <div class="mb-3 mt-12">
+                    <label class="form-label">Data premiery<span class="text-danger">*</span></label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="calendar" class="fea icon-sm icons d-flex"></i-feather>
+                      <input readonly class="form-control ps-5 pt-2" placeholder="yyyy-mm-dd" name="premiere"
+                             [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                             (click)="d.toggle()">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mt-4 mt-sm-0">
+                  <div class="text-center text-md-end">
+                    <button type="submit" name="push" class="btn btn-success">
+                      Dodaj
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+              <!-- TAG CLOUDS -->
+
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+        <!-- END SIDEBAR -->
+      </div>
+      <!--end row-->
+    </form>
+  </div>
+  <!--end container-->
+</section>
+<!--end section-->
+<!-- Blog End -->
+
+<!-- Back to top -->
+<!--<a href="javascript: void(0);" class="btn btn-icon btn-primary back-to-top" id="back-to-top" [ngxScrollTo]="'#home'">-->
+<!--  <i-feather name="arrow-up" class="icons"></i-feather>-->
+<!--</a>-->
+<!-- Back to top -->
