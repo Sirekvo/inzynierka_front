@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {PostInput} from "../models/post.model";
 import {PostService} from "../services/post.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-blog-admin',
@@ -20,7 +21,8 @@ export class BlogAdminComponent implements OnInit {
 
   postList: Array<PostInput>;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.postService.getPost().subscribe(
@@ -38,6 +40,9 @@ export class BlogAdminComponent implements OnInit {
           this.ngOnInit();
         },
     );
+  }
+  editPost(id: number){
+    this.router.navigate(['/post-edition', id]);
   }
 
 

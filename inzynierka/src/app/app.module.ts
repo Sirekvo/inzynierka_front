@@ -54,7 +54,7 @@ import {
 import {PostService} from "./shared/services/post.service";
 import {NgPipesModule} from "ngx-pipes";
 import {BlogAdminComponent} from "./shared/blog-admin/blog-admin.component";
-import {PostEditionComponent} from "./core/components/post-edtion/post.edition.component";
+import {PostEditionComponent} from "./core/components/post-edition/post-edition.component";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {

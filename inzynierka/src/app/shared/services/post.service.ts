@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders, HttpBackend} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {PostInput, PostOutput} from "../models/post.model";
+import {PostInput, PostInputById, PostOutput} from "../models/post.model";
 
 
 
@@ -40,13 +40,10 @@ export class PostService {
         return this.httpClient_withoutToken.post(environment.apiUrl + '/series', body);
     }
     deletePost(id : number): Observable<any> {
-
-
-
-        console.log(id)
-
-
         return this.httpClient_withoutToken.delete(environment.apiUrl + '/series/' + id);
+    }
+    getPostById(id : number): Observable<PostInputById> {
+        return this.httpClient_withoutToken.get<PostInputById>(environment.apiUrl + '/series/' + id);
     }
 
 }
