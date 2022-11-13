@@ -10,6 +10,7 @@ import {Upload} from "../../../shared/models/image.model";
 import * as _ from 'lodash';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngbd-modal-confirm',
@@ -163,7 +164,8 @@ export class PageBlogDetailTwoComponent implements OnInit {
   constructor(private postService: PostService,
               private af:AngularFireStorage,
               private imageService: ImageService,
-              private _modalService: NgbModal,) { }
+              private _modalService: NgbModal,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.resetForm();
@@ -181,19 +183,6 @@ export class PageBlogDetailTwoComponent implements OnInit {
     (await this.task).ref.getDownloadURL().then(url => {
       this.downloadUrl = url
     });
-    // task.snapshotChanges().pipe(
-    //     finalize(() => {
-    //       this.downloadUrl = fileRef.getDownloadURL()
-    //       console.log(this.downloadUrl);
-    //       this.downloadUrl.subscribe(url => {
-    //         if(this.url){
-    //           this.url = url
-    //           // this.files.push(this.file)
-    //         }
-    //       })
-    //     })
-    // ).subscribe();
-    // console.log(this.files);
   }
   handleFiles($event){
     this.imgSrc = $event.target.files[0];
@@ -203,42 +192,16 @@ export class PageBlogDetailTwoComponent implements OnInit {
   }
   // async onSubmit(form: any) {
    onSubmit = async (form: any) =>{
-    console.log(form.value.creator);
-    console.log(form.value.title);
-    console.log(form.value.description);
-    console.log(form.value.production);
-    console.log(form.value.premiere);
-    console.log(form.value.genre);
     const new_date = form.value.premiere.year + "-" + form.value.premiere.month + "-" + form.value.premiere.day;
-    console.log(new_date);
 
-    // const filePath = `Images/${this.imgSrc['name']}`;
-    // console.log(filePath);
-    // const fileRef = this.af.ref(filePath);
-    // fileRef.put(filePath);
-    // TaskSnapshot
-
-    // this.af.upload("/files"+Math.random()+this.imgSrc,this.imgSrc)
-    // this.task = this.af.upload(filePath, this.imgSrc);
-    // fileRef.getDownloadURL().subscribe(url => {
-    //   this.downloadUrl = url
-    //   console.log(this.downloadUrl);
-    //
-    // });
-
-     // this.downloadUrl = await fileRef.getDownloadURL().toPromise()
 
      while(this.check == true){
        if(this.downloadUrl != '')
        {
          this.check=false;
-
-         console.log('usunieto');
          this.postService.createPost(form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl).subscribe(
              (response: any) => {
-               console.log(response)
-
-               console.log("przeszlo!");
+               this.router.navigate(['/admin'])
                this.resetForm();
                form.reset();
              },
@@ -249,12 +212,7 @@ export class PageBlogDetailTwoComponent implements OnInit {
          );
 
        }
-       // console.log("puste");
-       // console.log("url:" + this.downloadUrl);
      }
-     // else{
-     //   console.log("jest: " + this.downloadUrl)
-     // }
 
     this.isSubmitted = true;
 

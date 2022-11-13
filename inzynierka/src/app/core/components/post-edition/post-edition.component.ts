@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbDateStruct, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDate, NgbDateStruct, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {PostInput, PostInputById} from "../../../shared/models/post.model";
 import {Upload} from "../../../shared/models/image.model";
 import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/compat/storage";
 import {PostService} from "../../../shared/services/post.service";
 import {ImageService} from "../../../shared/services/image.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {getParams} from "swiper/angular/angular/src/utils/get-params";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {getLocaleTimeFormat} from "@angular/common";
 
 @Component({
   selector: 'app-post-edition',
@@ -25,18 +27,17 @@ export class PostEditionComponent implements OnInit {
   model: NgbDateStruct;
   date = new Date();
   check = true;
+  contactForm: FormGroup;
 
   genres: Array<string> = ['Komedia', 'Dramat', 'Romantyczny', 'Science fiction', 'Kryminalny', 'Fantasy', 'Wojenny', 'Horror'];
   genresSelected = this.genres[0];
 
-  // formTemplate = new FormGroup({
-  //   id: new FormControl(''),
-  //   imageUrl : new FormControl(''),
-  // })
+
 
   postList: Array<PostInputById>;
   imageUrl: string;
   downloadUrl: string;
+  newDownloadUrl = '';
   upload: Upload;
   task: AngularFireUploadTask;
   id: number;
@@ -44,80 +45,95 @@ export class PostEditionComponent implements OnInit {
   creator: string;
   production: string;
   description: string;
+  premiere: string;
+  day: number;
+  month: any;
+  year: number;
 
 
   constructor(private postService: PostService,
               private af:AngularFireStorage,
               private imageService: ImageService,
               private _modalService: NgbModal,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router,) { }
 
   ngOnInit(): void {
     this.id = parseFloat(this.route.snapshot.paramMap.get('id'));
-    console.log(this.id);
-    console.log(typeof this.id);
     this.resetForm();
     this.postService.getPostById(this.id).subscribe(
         (post: PostInputById) => {
           this.title = post.title;
           this.creator = post.creator;
-          this.genresSelected = post.genre;
           this.description = post.description;
           this.production = post.production;
           this.downloadUrl = post.url;
+          this.genresSelected = post.genre;
+          this.premiere = post.premiere;
+          this.day = parseInt(post.premiere.substring(0,4));
+          this.month = parseInt(post.premiere.substring(5,7));
+          this.year = parseInt(post.premiere.substring(8,12));
+          this.model = new NgbDate(this.year,this.month,this.day);
+          console.log(this.model);
+
+
         },
         () => {
         }
 
     );
-    console.log(this.postList);
   }
 
   async uploadImages() {
     console.log(this.imgSrc);
-    // this.postList.map(t => t.series_id)
     const filePath = `Images/${this.imgSrc['name']}`;
     console.log(filePath);
     const fileRef = this.af.ref(filePath);
-    // this.af.upload("/files"+Math.random()+this.imgSrc,this.imgSrc)
     this.task = this.af.upload(filePath, this.imgSrc);
     (await this.task).ref.getDownloadURL().then(url => {
-      this.downloadUrl = url
+      this.newDownloadUrl = url
+      this.downloadUrl = this.newDownloadUrl;
     });
   }
   handleFiles($event){
     this.imgSrc = $event.target.files[0];
-    const file=$event[1];
   }
   // async onSubmit(form: any) {
   onSubmit(form: any){
+    const new_date = form.value.premiere.year + "-" + form.value.premiere.month + "-" + form.value.premiere.day;
+    console.log(new_date);
+    while(this.check == true){
+      if(this.downloadUrl != '')
+      {
+        this.check=false;
+        this.postService.editPost(this.id, form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl).subscribe(
+            (response: any) => {
+              console.log("przeszlo!");
+              this.router.navigate(['/admin']);
+              this.resetForm();
+              form.reset();
+            },
+            () => {
+              this.check=false;
+              this.af.refFromURL(this.downloadUrl).delete();
+            }
+        );
 
-    console.log(form.value.title);
-    // const new_date = form.value.premiere.year + "-" + form.value.premiere.month + "-" + form.value.premiere.day;
-    // while(this.check == true){
-    //   if(this.downloadUrl != '')
-    //   {
-    //     this.check=false;
-    //
-    //     console.log('usunieto');
-    //     this.postService.createPost(form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl).subscribe(
-    //         (response: any) => {
-    //           console.log(response)
-    //
-    //           console.log("przeszlo!");
-    //           this.resetForm();
-    //           form.reset();
-    //         },
-    //         () => {
-    //           this.check=false;
-    //           this.af.refFromURL(this.downloadUrl).delete();
-    //         }
-    //     );
-    //
-    //   }
-    // }
+      }
+    }
     this.isSubmitted = true;
 
+  }
+  cancelChange(){
+    console.log(this.newDownloadUrl);
+    if(this.newDownloadUrl == ''){
+      this.router.navigate(['/admin']);
+    }
+    else{
+      this.af.refFromURL(this.newDownloadUrl).delete();
+      this.router.navigate(['/admin']);
+
+    }
   }
 
   showPreview(event: any){

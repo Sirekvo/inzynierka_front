@@ -5,7 +5,7 @@
       <div class="col-lg-12 text-center">
         <div class="page-next-level">
           <div class="col-lg-12 form-group">
-            <H1> Edycja postu </H1>
+            <H1> Edycja posta </H1>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
             <img [src]="downloadUrl" class="img-fluid rounded-top">
             <div class="mt-4">
               <input type="file" (change)="handleFiles($event)" accept="*.png.jpg.jpeg">
-              <button type="button" class="btn btn-primary" (click) = uploadImages()>Dodaj zdjęcie wyróżniające</button>
+              <button type="button" class="btn btn-primary" (click) = uploadImages()>Zmień zdjęcie wyróżniające</button>
             </div>
             <div class="card shadow rounded border-0 mt-4">
               <div class="card-body">
@@ -40,7 +40,7 @@
                     <div class="mb-3">
                       <div class="form-icon position-relative">
                           <textarea id="message" name="description" placeholder="Dodaj opis" rows="25"
-                                    class="form-control" ngModel></textarea>
+                                    class="form-control" [(ngModel)]="description"></textarea>
                       </div>
                     </div>
                   </div>
@@ -60,7 +60,7 @@
 
               <!-- TAG CLOUDS -->
 
-              <div class="widget mb-4 pb-2">
+              <div class="widget mb-4 pb-2 flex-column">
 
                 <h5 class="widget-title">Ważne informacje o serialu</h5>
                 <div class="col-lg-12 form-group">
@@ -68,7 +68,7 @@
                     <label class="form-label">Tytuł</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" name="title" [value]="title" class="form-control ps-5 pt-2" placeholder="Tytuł" ngModel>
+                      <input type="text" name="title" class="form-control ps-5 pt-2" placeholder="Tytuł" [(ngModel)]="title">
                     </div>
                   </div>
                 </div>
@@ -77,7 +77,7 @@
                     <label class="form-label">Twórca</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" name="creator" class="form-control ps-5 pt-2" placeholder="Twórca" ngModel>
+                      <input type="text" name="creator" class="form-control ps-5 pt-2" placeholder="Twórca" [(ngModel)]="creator">
                     </div>
                   </div>
                 </div>
@@ -97,7 +97,7 @@
                     <label class="form-label">Produkcja</label>
                     <div class="form-icon position-relative">
                       <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
-                      <input type="text" name="production" class="form-control ps-5 pt-2" placeholder="Produkcja" ngModel>
+                      <input type="text" name="production" class="form-control ps-5 pt-2" placeholder="Produkcja" [(ngModel)]="production">
                     </div>
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                 <!--                </div>-->
                 <div class="col-lg-12">
                   <div class="mb-3 mt-12">
-                    <label class="form-label">Data premiery<span class="text-danger">*</span></label>
+                    <label class="form-label">Data premiery</label>
                     <div class="form-icon position-relative">
                       <i-feather name="calendar" class="fea icon-sm icons d-flex"></i-feather>
                       <input readonly class="form-control ps-5 pt-2" placeholder="yyyy-mm-dd" name="premiere"
@@ -121,13 +121,21 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4 mt-4 mt-sm-0">
+                <div class="col-md-6 mt-4 ">
                   <div class="text-center text-md-end">
                     <button type="submit" name="push" class="btn btn-success">
-                      Dodaj
+                      Zapisz zmiany
                     </button>
                   </div>
                 </div>
+                <div class="col-md-6 mt-4 ">
+                  <div class="text-center text-md-end" >
+                    <button type="button" (click)="cancelChange()" name="cancel" class="btn btn-danger">
+                      Anuluj zmiany
+                    </button>
+                  </div>
+                </div>
+
 
               </div>
               <!-- TAG CLOUDS -->

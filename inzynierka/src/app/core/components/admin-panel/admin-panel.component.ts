@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {PostInput, PostInputByTitle} from "../../../shared/models/post.model";
+import {PostService} from "../../../shared/services/post.service";
+import firebase from "firebase/compat";
+import app = firebase.app;
 
 @Component({
     selector: 'app-admin-panel',
@@ -21,7 +25,8 @@ export class AdminPanelComponent implements OnInit {
      */
     showNavigationArrows = true;
     showNavigationIndicators = false;
-
+    postList: Array<PostInput>;
+    newPostList: Array<PostInputByTitle>;
     /**
      * Blog Data
      */
@@ -80,9 +85,32 @@ export class AdminPanelComponent implements OnInit {
         }
     ];
 
-    constructor() { }
+    constructor(private postService: PostService) { }
 
     ngOnInit(): void {
+        this.postService.getPost().subscribe(
+            (post: Array<PostInput>) => {
+                this.postList = post;
+            },
+            () => {
+            }
+
+        );
+    }
+    findByTitle(form){
+        if(form.value.title){
+            this.postService.getPostByTitle(form.value.title).subscribe(
+                (post: Array<PostInputByTitle>) => {
+                    this.postList = post;
+                },
+                () => {
+                }
+            );
+        }
+        else{
+            this.ngOnInit()
+        }
+
     }
 
 }

@@ -10,29 +10,31 @@ import {Router} from "@angular/router";
 })
 export class BlogAdminComponent implements OnInit {
 
-  @Input() blogData: Array<{
-    image: string;
+  @Input() postList: Array<{
+    series_id: number;
     title: string;
-    like: string;
-    message: string;
-    name: string;
-    date: string;
+    creator: string;
+    genre: string;
+    production: string;
+    premiere: string;
+    description: string;
+    url: string;
   }>;
 
-  postList: Array<PostInput>;
+  // postList: Array<PostInput>;
 
   constructor(private postService: PostService,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.postService.getPost().subscribe(
-        (post: Array<PostInput>) => {
-          this.postList = post;
-        },
-        () => {
-        }
-
-    );
+    // this.postService.getPost().subscribe(
+    //     (post: Array<PostInput>) => {
+    //       this.postList = post;
+    //     },
+    //     () => {
+    //     }
+    //
+    // );
   }
   deletePost(id){
     this.postService.deletePost(id).subscribe(
