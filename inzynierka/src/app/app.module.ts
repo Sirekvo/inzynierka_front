@@ -109,7 +109,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     ReactiveFormsModule,
-    NgPipesModule
+    NgPipesModule,
+
   ],
   exports: [
     FeatherModule,

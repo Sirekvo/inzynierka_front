@@ -70,11 +70,10 @@ export class PostEditionComponent implements OnInit {
           this.downloadUrl = post.url;
           this.genresSelected = post.genre;
           this.premiere = post.premiere;
-          this.day = parseInt(post.premiere.substring(0,4));
+          this.year = parseInt(post.premiere.substring(0,4));
           this.month = parseInt(post.premiere.substring(5,7));
-          this.year = parseInt(post.premiere.substring(8,12));
+          this.day = parseInt(post.premiere.substring(8,12));
           this.model = new NgbDate(this.year,this.month,this.day);
-          console.log(this.model);
 
 
         },
@@ -101,7 +100,6 @@ export class PostEditionComponent implements OnInit {
   // async onSubmit(form: any) {
   onSubmit(form: any){
     const new_date = form.value.premiere.year + "-" + form.value.premiere.month + "-" + form.value.premiere.day;
-    console.log(new_date);
     while(this.check == true){
       if(this.downloadUrl != '')
       {
