@@ -1,11 +1,3 @@
-export class Upload {
-    $key: string;
-    file: File;
+export class UrlInput {
     url: string;
-    name: string;
-    progress: number;
-
-    constructor(file: File) {
-        this.file = file;
-    }
 }

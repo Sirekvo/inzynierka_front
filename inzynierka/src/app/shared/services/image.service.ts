@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {AngularFireModule} from "@angular/fire/compat";
-import {Upload} from "../models/image.model";
 // import * as firebase from 'firebase';
 
 @Injectable({

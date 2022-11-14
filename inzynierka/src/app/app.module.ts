@@ -55,6 +55,8 @@ import {PostService} from "./shared/services/post.service";
 import {NgPipesModule} from "ngx-pipes";
 import {BlogAdminComponent} from "./shared/blog-admin/blog-admin.component";
 import {PostEditionComponent} from "./core/components/post-edition/post-edition.component";
+import {SliderEditorComponent} from "./core/components/admin-settings/slider-editor/slider-editor.component";
+import {SlidersComponent} from "./shared/sliders/sliders.component";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -80,7 +82,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AdminPanelComponent,
     NgbdModalConfirm,
     BlogAdminComponent,
-    PostEditionComponent
+    PostEditionComponent,
+    SliderEditorComponent,
+    SlidersComponent
 
   ],
   imports: [

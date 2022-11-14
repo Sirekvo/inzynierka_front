@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {PostInput, PostInputById, PostInputByTitle, PostOutput} from "../models/post.model";
+import {UrlInput} from "../models/image.model";
 
 
 
@@ -56,5 +57,13 @@ export class PostService {
     getPostByTitle(title : string): Observable<Array<PostInputByTitle>> {
         return this.httpClient_withoutToken.get<Array<PostInputByTitle>>(environment.apiUrl + '/findBy/' + title);
     }
-
+    sendSliderUrl(url: string): Observable<any>{
+        const body = {
+            url
+        }
+        return this.httpClient_withoutToken.post(environment.apiUrl + '/sliders', body)
+    }
+    getSliderUrl(): Observable<Array<UrlInput>> {
+        return this.httpClient_withoutToken.get<Array<UrlInput>>(environment.apiUrl + '/sliders')
+    }
 }

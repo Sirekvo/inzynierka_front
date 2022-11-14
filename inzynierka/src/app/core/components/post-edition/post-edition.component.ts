@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbDate, NgbDateStruct, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {PostInput, PostInputById} from "../../../shared/models/post.model";
-import {Upload} from "../../../shared/models/image.model";
 import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/compat/storage";
 import {PostService} from "../../../shared/services/post.service";
 import {ImageService} from "../../../shared/services/image.service";
@@ -38,7 +37,6 @@ export class PostEditionComponent implements OnInit {
   imageUrl: string;
   downloadUrl: string;
   newDownloadUrl = '';
-  upload: Upload;
   task: AngularFireUploadTask;
   id: number;
   title: string;

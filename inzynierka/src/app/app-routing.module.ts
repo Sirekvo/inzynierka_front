@@ -14,6 +14,7 @@ import {ImagesComponent} from "./core/components/images/images.component";
 import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
 import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
 import {PostEditionComponent} from "./core/components/post-edition/post-edition.component";
+import {SliderEditorComponent} from "./core/components/admin-settings/slider-editor/slider-editor.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
       {path:'list', component: ImageListComponent}
     ]},
   {path: 'post-edition/:id', component:PostEditionComponent},
+  {path: 'sliders', component: SliderEditorComponent},
 
 ];
 

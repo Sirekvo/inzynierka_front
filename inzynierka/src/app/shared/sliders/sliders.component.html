@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-xl-auto col-lg-auto col-md-6 col-6 mt-4 pt-2" *ngFor="let url of urlList">
+    <div class="card blog rounded border-0 shadow">
+      <div class="position-relative">
+        <img src="{{url.url}}" class="card-img-top rounded-top center center"
+             alt="..." style="width:30em; height:17em;">
+        <div class="overlay rounded-top bg-dark"></div>
+      </div>
+      <div class="card-body content">
+        <div class="post-meta d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-secondary col-md-6"  >Zmień zdjęcie</button>
+          <button type="button" class="btn btn-danger col-md-6"  >Usuń</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

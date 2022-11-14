@@ -29,7 +29,7 @@
               <!--end col-->
               <div class="col-lg-12 col-md-12">
                 <div class="row align-items-end">
-                <h2 class="text-center">Panel administratorski</h2>
+                  <h2 class="text-center">Panel administratorski</h2>
                   <!--end col-->
                 </div>
                 <!--end row-->
@@ -57,14 +57,14 @@
         <div class="sidebar sticky-bar px-4 rounded shadow">
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
-              <li class="navbar-item account-menu px-0 active">
+              <li class="navbar-item account-menu px-0">
                 <a routerLink="/admin" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-user-circle"></i></span>
                   <h6 class="mb-0 ms-2 ">Profil</h6>
                 </a>
               </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
+              <li class="navbar-item account-menu px-0 mt-2 active">
                 <a routerLink="/sliders" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
                   <h6 class="mb-0 ms-2">Slider</h6>
@@ -88,7 +88,7 @@
 
               <li class="navbar-item account-menu px-0 mt-2">
                 <a  routerLink="/login"
-                   class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                    class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
                   <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
                   <h6 class="mb-0 ms-2">Wyloguj się</h6>
                 </a>
@@ -102,31 +102,10 @@
       <div class="col-lg-9 col-12 position-relative">
         <div class="pb-4">
           <div class="d-inline-flex col-12 ">
-            <h3 class="col-8">Wszystkie posty</h3>
-            <a href="/post-creator" class="btn btn-soft-primary">Dodaj nowy post
-              <i-feather name="arrow-right" class="fea icon-sm"></i-feather>
-            </a>
+            <h3 class="col-8">Slidery</h3>
           </div>
           <hr>
-          <div class="col-md-8">
-            <div class=" blog-search">
-              <div class="row justify-content-center">
-                <div class="text-center subcribe-form">
-                  <form #f=ngForm (keyup)="findByTitle(f)">
-                    <input type="text" name="title" class="rounded-pill shadow-md bg-white"
-                           placeholder="Szukaj po nazwie..." ngModel>
-                    <button type="submit" class="btn btn-pills btn-primary">Szukaj</button>
-                  </form>
-                  <!--end form-->
-                </div>
-                <!--end col-->
-              </div>
-              <!--end row-->
-            </div>
-            <!--end div-->
-          </div>
-          <!--end col-->
-          <app-blog-admin [postList]="postList"></app-blog-admin>
+          <app-sliders [urlList]="urlList"></app-sliders>
         </div>
       </div>
       <!--end col-->
@@ -138,109 +117,33 @@
 </section>
 
 <section class="section">
-<!--  <div class="container">-->
-<!--    <div class="row">-->
-<!--      <div class="col-lg-12">-->
-<!--        <div class="features-absolute blog-search">-->
-<!--          <div class="row justify-content-center">-->
-<!--            <div class="col-md-10">-->
-<!--              <div class="text-center subcribe-form">-->
-<!--                <form style="max-width: 800px;">-->
-<!--                  <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-<!--                         placeholder="Search keywords...">-->
-<!--                  <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-<!--                </form>-->
-<!--                &lt;!&ndash;end form&ndash;&gt;-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash;end col&ndash;&gt;-->
-<!--          </div>-->
-<!--          &lt;!&ndash;end row&ndash;&gt;-->
-<!--        </div>-->
-<!--        &lt;!&ndash;end div&ndash;&gt;-->
-<!--      </div>-->
-<!--      &lt;!&ndash;end col&ndash;&gt;-->
-<!--    </div>-->
-<!--    &lt;!&ndash;end row&ndash;&gt;-->
-<!--  </div>-->
-<!--  &lt;!&ndash;end container&ndash;&gt;-->
+  <!--  <div class="container">-->
+  <!--    <div class="row">-->
+  <!--      <div class="col-lg-12">-->
+  <!--        <div class="features-absolute blog-search">-->
+  <!--          <div class="row justify-content-center">-->
+  <!--            <div class="col-md-10">-->
+  <!--              <div class="text-center subcribe-form">-->
+  <!--                <form style="max-width: 800px;">-->
+  <!--                  <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
+  <!--                         placeholder="Search keywords...">-->
+  <!--                  <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
+  <!--                </form>-->
+  <!--                &lt;!&ndash;end form&ndash;&gt;-->
+  <!--              </div>-->
+  <!--            </div>-->
+  <!--            &lt;!&ndash;end col&ndash;&gt;-->
+  <!--          </div>-->
+  <!--          &lt;!&ndash;end row&ndash;&gt;-->
+  <!--        </div>-->
+  <!--        &lt;!&ndash;end div&ndash;&gt;-->
+  <!--      </div>-->
+  <!--      &lt;!&ndash;end col&ndash;&gt;-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash;end row&ndash;&gt;-->
+  <!--  </div>-->
+  <!--  &lt;!&ndash;end container&ndash;&gt;-->
 
-  <div class="container mt-100 mt-60 border-0 shadow rounded">
-    <div class="row align-items-center mb-4 pb-4">
-      <div class="col-md-3">
-        <div class="section-title text-md-left">
-          <h4 class="mb-4">Wszystkie posty</h4>
-
-        </div>
-      </div>
-      <!--end col-->
-
-<!--      <form style="max-width: 100px;">-->
-<!--        <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-<!--               placeholder="Search keywords...">-->
-<!--        <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-<!--      </form>-->
-<!--      <div class="row">-->
-<!--        <div class="col-lg-3">-->
-<!--          <div class="features-absolute blog-search">-->
-<!--            <div class="row justify-content-center">-->
-<!--              <div class="col-md-10">-->
-<!--                <div class="text-center subcribe-form">-->
-<!--                  <form style="max-width: 800px;">-->
-<!--                    <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-<!--                           placeholder="Search keywords...">-->
-<!--                    <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-<!--                  </form>-->
-<!--                  &lt;!&ndash;end form&ndash;&gt;-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              &lt;!&ndash;end col&ndash;&gt;-->
-<!--            </div>-->
-<!--            &lt;!&ndash;end row&ndash;&gt;-->
-<!--          </div>-->
-<!--          &lt;!&ndash;end div&ndash;&gt;-->
-<!--        </div>-->
-<!--        &lt;!&ndash;end col&ndash;&gt;-->
-<!--      </div>-->
-      <!--end row-->
-      <div class="col-md-6">
-        <div class=" blog-search">
-          <div class="row justify-content-center">
-            <div class="text-center subcribe-form">
-              <form #f=ngForm (keyup)="findByTitle(f)">
-                <input type="text" name="title" class="rounded-pill shadow-md bg-white"
-                       placeholder="Szukaj po nazwie..." ngModel>
-                <button type="submit" class="btn btn-pills btn-primary">Szukaj</button>
-              </form>
-              <!--end form-->
-            </div>
-            <!--end col-->
-          </div>
-          <!--end row-->
-        </div>
-        <!--end div-->
-      </div>
-      <!--end col-->
-      <div class="col-md-3 mt-4 mt-sm-0">
-        <div class="text-center text-md-end">
-          <a href="/post-creator" class="btn btn-soft-primary">Dodaj nowy post
-            <i-feather name="arrow-right" class="fea icon-sm"></i-feather>
-          </a>
-        </div>
-      </div>
-      <!--end col-->
-    </div>
-    <!--end row-->
-    <app-blog-admin [postList]="postList"></app-blog-admin>
-    <div class="col-12 mt-4 pt-2">
-      <div class="text-center">
-        <a href="javascript:void(0)" class="btn btn-primary">See More <i-feather name="arrow-right" class="fea icon-sm">
-        </i-feather></a>
-      </div>
-    </div>
-    <!--end row-->
-  </div>
-  <!--end container-->
 </section>
 <!--end section-->
 <section class="main-slider" id="home">
@@ -274,12 +177,7 @@
         <button class="btn btn-primary">Edytuj</button>
       </div>
     </div>
-
-
-
   </div>
-
-
 </section>
 <!--end container-->
 <!-- Hero End -->

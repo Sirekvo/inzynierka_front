@@ -6,7 +6,6 @@ import {delay, finalize} from "rxjs/operators";
 import {ImageService} from "../../../shared/services/image.service";
 import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/compat/storage";
 import {ModalDismissReasons, NgbActiveModal, NgbDateStruct, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {Upload} from "../../../shared/models/image.model";
 import * as _ from 'lodash';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -38,7 +37,6 @@ export class NgbdModalConfirm {
   imgSrc : string;
 
   files: any = [];
-  upload: Upload;
   downloadUrl= '';
   url;
   task: AngularFireUploadTask;
@@ -156,7 +154,6 @@ export class PageBlogDetailTwoComponent implements OnInit {
   lastPostId: number[];
   imageUrl: string;
   downloadUrl: string;
-  upload: Upload;
   task: AngularFireUploadTask;
 
 
