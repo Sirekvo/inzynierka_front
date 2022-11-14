@@ -59,6 +59,16 @@ export class UserService {
         return null;
     }
 
+    registerUser(email: string, password: string, name: string, lastname: string, role: string) {
+        const body = {
+            email,
+            password,
+            name,
+            lastname,
+            role,
+        }
+        return this.httpClient_withoutToken.post(environment.apiUrl + '/user', body)
+    }
 
     // changeInformation(name: string, lastName: string, pesel: string): Observable<any> {
     //     const body = {

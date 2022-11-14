@@ -27,25 +27,14 @@ export class AdminPanelComponent implements OnInit {
     showNavigationArrows = true;
     showNavigationIndicators = false;
     postList: Array<PostInput>;
-    urlList: Array<UrlInput>;
     newPostList: Array<PostInputByTitle>;
 
     constructor(private postService: PostService) { }
 
     ngOnInit(): void {
-        this.postService.getSliderUrl().subscribe(
-            (url: Array<PostInput>) => {
-                this.urlList = url;
-                console.log("udalo sie");
-            },
-            () => {
-            }
-
-        );
         this.postService.getPost().subscribe(
             (post: Array<PostInput>) => {
                 this.postList = post;
-                console.log("to tez udalo sie");
             },
             () => {
             }

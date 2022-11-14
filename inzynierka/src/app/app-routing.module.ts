@@ -15,6 +15,7 @@ import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.com
 import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
 import {PostEditionComponent} from "./core/components/post-edition/post-edition.component";
 import {SliderEditorComponent} from "./core/components/admin-settings/slider-editor/slider-editor.component";
+import {NewRedactorComponent} from "./core/components/admin-settings/new-redactor/new-redactor.component";
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
     ]},
   {path: 'post-edition/:id', component:PostEditionComponent},
   {path: 'sliders', component: SliderEditorComponent},
+  {path: 'new-redactor', component: NewRedactorComponent}
 
 ];
 

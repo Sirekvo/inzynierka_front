@@ -57,6 +57,7 @@ import {BlogAdminComponent} from "./shared/blog-admin/blog-admin.component";
 import {PostEditionComponent} from "./core/components/post-edition/post-edition.component";
 import {SliderEditorComponent} from "./core/components/admin-settings/slider-editor/slider-editor.component";
 import {SlidersComponent} from "./shared/sliders/sliders.component";
+import {NewRedactorComponent} from "./core/components/admin-settings/new-redactor/new-redactor.component";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -84,7 +85,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BlogAdminComponent,
     PostEditionComponent,
     SliderEditorComponent,
-    SlidersComponent
+    SlidersComponent,
+    NewRedactorComponent
 
   ],
   imports: [
