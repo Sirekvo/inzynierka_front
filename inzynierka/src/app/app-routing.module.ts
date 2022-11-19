@@ -16,6 +16,7 @@ import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two
 import {PostEditionComponent} from "./core/components/post-edition/post-edition.component";
 import {SliderEditorComponent} from "./core/components/admin-settings/slider-editor/slider-editor.component";
 import {NewRedactorComponent} from "./core/components/admin-settings/new-redactor/new-redactor.component";
+import {AccountSettingsComponent} from "./core/components/account-settings/account-settings.component";
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
     ]},
   {path: 'post-edition/:id', component:PostEditionComponent},
   {path: 'sliders', component: SliderEditorComponent},
-  {path: 'new-redactor', component: NewRedactorComponent}
+  {path: 'new-redactor', component: NewRedactorComponent},
+  {path: 'settings', component: AccountSettingsComponent}
 
 ];
 

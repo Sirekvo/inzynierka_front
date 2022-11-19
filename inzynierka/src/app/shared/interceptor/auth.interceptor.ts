@@ -19,11 +19,13 @@ export class AuthInterceptor implements HttpInterceptor {
         if (!this.userService) {
             this.userService = this.injector.get(UserService);
         }
-
+        console.log(this.userService.getToken());
         req = req.clone({
+
             headers: req.headers
                 .set('authorization', 'Bearer ' + this.userService.getToken())
         });
+        console.log(req.headers);
         return next.handle(req);
     }
 

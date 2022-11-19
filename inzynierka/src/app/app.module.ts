@@ -58,6 +58,10 @@ import {PostEditionComponent} from "./core/components/post-edition/post-edition.
 import {SliderEditorComponent} from "./core/components/admin-settings/slider-editor/slider-editor.component";
 import {SlidersComponent} from "./shared/sliders/sliders.component";
 import {NewRedactorComponent} from "./core/components/admin-settings/new-redactor/new-redactor.component";
+import {AccountSettingsComponent} from "./core/components/account-settings/account-settings.component";
+import {BlogComponent} from "./shared/blog/blog.component";
+import {CommonModule} from "@angular/common";
+import {HeaderComponent} from "./shared/header/header.component";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -76,6 +80,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AuthLoginComponent,
     AppComponent,
     FooterComponent,
+    HeaderComponent,
     IndexBlogComponent,
     ImagesComponent,
     ImageComponent,
@@ -83,10 +88,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AdminPanelComponent,
     NgbdModalConfirm,
     BlogAdminComponent,
+    BlogComponent,
     PostEditionComponent,
     SliderEditorComponent,
     SlidersComponent,
-    NewRedactorComponent
+    NewRedactorComponent,
+    AccountSettingsComponent
 
   ],
   imports: [
@@ -116,6 +123,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     NgPipesModule,
+    CommonModule
 
   ],
   exports: [

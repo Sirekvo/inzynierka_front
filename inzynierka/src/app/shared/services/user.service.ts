@@ -51,7 +51,7 @@ export class UserService {
 
     getToken(): string {
         const user = this.getLocalUser();
-
+        console.log(user.token)
         if (user) {
             return user.token;
         }
@@ -70,12 +70,11 @@ export class UserService {
         return this.httpClient_withoutToken.post(environment.apiUrl + '/user', body)
     }
 
-    // changeInformation(name: string, lastName: string, pesel: string): Observable<any> {
-    //     const body = {
-    //         name,
-    //         lastName,
-    //         pesel
-    //     };
-    //     return this.httpClient.put(environment.apiUrl + '/account/change-information', body);
-    // }
+    changePassword(account_id: number, password: string): Observable<any> {
+        const body = {
+            account_id,
+            password
+        };
+        return this.httpClient.put(environment.apiUrl + '/change-password', body);
+    }
 }
