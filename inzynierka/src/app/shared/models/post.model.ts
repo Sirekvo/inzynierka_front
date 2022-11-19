@@ -28,6 +28,13 @@ export class PostInputByTitle {
     description : string;
     url : string;
 }
+export class CommentsInput {
+    comment_id: number;
+    creator: string;
+    comment: string;
+    serie_id: number;
+    date: string;
+}
 export class PostOutput {
     title : string;
     creator : string;

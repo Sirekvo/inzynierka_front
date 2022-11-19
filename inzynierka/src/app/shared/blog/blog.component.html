@@ -1,9 +1,9 @@
 <div  class="row">
   <div class="col-xl-4 col-lg-6 col-md-6 col-6 mt-4 pt-2" *ngFor="let post of postList | orderBy: '-', let i=index" >
-    <div *ngIf="i<howMany" class="card blog rounded border-0 shadow">
+    <div *ngIf="i<howMany" class="card blog rounded border-0 shadow" (click)="showPost(post.series_id)">
       <div class="position-relative">
         <img [ngClass]="{'imgHeightWeb': web, 'imgHeightMobile': mobile}" src="{{post.url}}" class="card-img-top rounded-top center center imgHeightMobile imgHeightWeb"
-             alt="...">
+             alt="..." >
         <div class="overlay rounded-top bg-dark"></div>
       </div>
       <div class="card-body content">

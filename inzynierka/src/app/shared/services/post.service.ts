@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders, HttpBackend} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {PostInput, PostInputById, PostInputByTitle, PostOutput} from "../models/post.model";
+import {CommentsInput, PostInput, PostInputById, PostInputByTitle, PostOutput} from "../models/post.model";
 import {UrlInput} from "../models/image.model";
 
 
@@ -65,5 +65,18 @@ export class PostService {
     }
     getSliderUrl(): Observable<Array<UrlInput>> {
         return this.httpClient_withoutToken.get<Array<UrlInput>>(environment.apiUrl + '/sliders')
+    }
+    postComment(creator: string, comment: string, serie_id: number, date: string): Observable<any>{
+        const body = {
+            creator,
+            comment,
+            serie_id,
+            date
+        }
+        return this.httpClient_withoutToken.post(environment.apiUrl + '/comment', body);
+    }
+    getComments(serie_id: number): Observable<Array<CommentsInput>>{
+
+        return this.httpClient_withoutToken.get<Array<CommentsInput>>(environment.apiUrl + '/comment/' + serie_id);
     }
 }

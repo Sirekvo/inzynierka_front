@@ -25,7 +25,7 @@ const routes: Routes = [
     component: MasterPageComponent,
     children: [
       { path: '', component: IndexBlogComponent },
-      { path: 'page-blog-detail', component: PageBlogDetailComponent},
+
     ]
   },
   {path: 'login', component: AuthLoginComponent},
@@ -38,8 +38,8 @@ const routes: Routes = [
   {path: 'post-edition/:id', component:PostEditionComponent},
   {path: 'sliders', component: SliderEditorComponent},
   {path: 'new-redactor', component: NewRedactorComponent},
-  {path: 'settings', component: AccountSettingsComponent}
-
+  {path: 'settings', component: AccountSettingsComponent},
+  { path: 'post-detail/:id', component: PageBlogDetailComponent}
 ];
 
 @NgModule({

@@ -58,10 +58,8 @@ export class NewRedactorComponent implements OnInit {
         this.submitted = true;
 
         if(this.registerForm.invalid){
-            console.log("nie przechodzi");
             return;
         } else {
-            console.log("przechodzi");
             this.userService.registerUser(form.value.email,form.value.password, form.value.name, form.value.lastName, this.role_select).subscribe(
                 (resolve) => {
                     console.log("succes");

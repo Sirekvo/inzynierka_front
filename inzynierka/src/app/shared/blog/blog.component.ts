@@ -39,15 +39,8 @@ export class BlogComponent implements OnInit {
         }
 
     }
-    deletePost(id){
-        this.postService.deletePost(id).subscribe(
-            (result) => {
-                this.ngOnInit();
-            },
-        );
-    }
-    editPost(id: number){
-        this.router.navigate(['/post-edition', id]);
+    showPost(id: number){
+        this.router.navigate(['/post-detail', id]);
     }
 
 
