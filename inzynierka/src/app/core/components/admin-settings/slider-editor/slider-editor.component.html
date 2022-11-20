@@ -100,19 +100,67 @@
       <!--end col-->
 
       <div class="col-lg-9 col-12 position-relative">
-        <div class="pb-4">
+        <div *ngIf="isVisible" class="pb-4">
           <div class="d-inline-flex col-12 ">
-            <h3 class="col-8">Slidery</h3>
+            <h3 class="col-11">Slidery</h3>
+            <button [ngxScrollTo]="'#slider'" [ngxScrollToDuration]="'0'"
+                    class="h3 text-primary bg-white border-0 p-0 m-0"
+                    ngbTooltip="Dodaj nowy slider" (click)="show_add_slider()">
+              <i class="uil uil-plus"></i>
+            </button>
           </div>
           <hr>
+          <p class="text-center text-danger">{{information_to_user}}</p>
           <app-sliders [urlList]="urlList"></app-sliders>
+        </div>
+        <div *ngIf="isVisibleAddSlider" id="slider" class="col-12">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-lg-12 col-md-12">
+              <div class="px-3 py-4">
+                <h4 class="title text-center">Dodaj nowy slider</h4>
+                <div class="row">
+                  <div class="col-lg-12 form-group">
+                    <div class="mb-3 mt-4">
+                      <div class="form-icon position-relative">
+                        <img [src]="downloadUrl" class="img-fluid rounded-top">
+                        <div class="mt-4">
+                          <input type="file" (change)="handleFiles($event)" accept="*.png.jpg.jpeg">
+                          <button type="button" class="btn btn-primary" (click) = uploadImages()>Dodaj zdjęcie</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col mb-0">
+                    <div class="d-grid">
+                      <button class="btn btn-secondary" type="button" (click)="back_to_start()">Pomiń</button>
+                    </div>
+                  </div>
+                  <div class="col mb-0">
+                    <div class="d-grid">
+                      <button class="btn btn-primary" type="submit" (click)="submit()">Gotowe
+                      </button>
+                    </div>
+                  </div>
+                  <!--end col-->
+                </div>
+                <!--end row-->
+              </div>
+              <!---->
+            </div>
+            <!--end col-->
+          </div>
+          <!--end row-->
         </div>
       </div>
       <!--end col-->
+
+
+      <!--end containter hidden_1-->
     </div>
     <!--end row-->
   </div>
   <!--end container-->
+
 
 </section>
 
