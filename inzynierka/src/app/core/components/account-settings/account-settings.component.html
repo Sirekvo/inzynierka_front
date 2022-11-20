@@ -95,72 +95,158 @@
         </div>
       </div>
       <!--end col-->
-
-      <div class="col-lg-4 col-12 position-relative">
-        <div class="pb-4">
-          <div class="d-inline-flex col-12 ">
-            <h3 class="col-8">Zmień hasło</h3>
-          </div>
-          <hr>
-          <form class="login-form" [formGroup]="changePasswordForm" #f="ngForm" (ngSubmit)="changePassword(f)">
-            <div class="row mt-4 ">
-              <div class="col-lg-12 form-group">
-                <div class="mb-3">
-                  <label class="form-label ">Stare hasło<span class="text-danger">*</span></label>
-                  <div class="form-icon position-relative">
-                    <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                    <input formControlName="password" type="tepasswordxt" class="form-control ps-5" placeholder="Stare hasło"
-                           [ngClass]="{ 'is-invalid': submitted && fChange.password.errors }">
-                    <div *ngIf="submitted && fChange.email.errors" class="invalid-feedback">
-                      <div *ngIf="fChange.email.errors.fChange">Należy podać stare hasło</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-12 form-group">
-                <div class="mb-3">
-                  <label class="form-label ">Nowe hasło<span class="text-danger">*</span></label>
-                  <div class="form-icon position-relative">
-                    <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                    <input formControlName="newPassword" type="password" class="form-control ps-5" placeholder="Nowe haśło"
-                           [ngClass]="{ 'is-invalid': submitted && fChange.newPassword.errors }">
-                    <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
-                      <div *ngIf="fChange.newPassword.errors.required">Powtórzenie hasła jest wymagane</div>
-                      <div *ngIf="fChange.newPassword.errors.mustMatch">Nowe hasło musi się różnić od starego</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-12 form-group">
-                <div class="mb-3">
-                  <label class="form-label ">Powtórz nowe hasło<span class="text-danger">*</span></label>
-                  <div class="form-icon position-relative">
-                    <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
-                    <input formControlName="confirmPassword" type="text" class="form-control ps-5" placeholder="Powtórz nowe hasło"
-                           [ngClass]="{ 'is-invalid': submitted && fChange.confirmPassword.errors }">
-                    <div *ngIf="submitted && fChange.confirmPassword.errors" class="invalid-feedback">
-                      <div *ngIf="fChange.confirmPassword.errors.fChange">Powtórzenie hasła jest wymagane</div>
-                      <div *ngIf="fChange.confirmPassword.errors.mustMatch">Hasła muszą się zgadzać</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--end col-->
-              <div class="col-lg-12 mt-2 mb-0">
-                <div class="d-grid">
-                  <div *ngIf="success" class="alert alert-success" role="alert">
-                    <b>Pomyślnie zmieniono hasło</b></div>
-                  <button type="submit" class="btn btn-primary" >Zmien haśło</button>
-                </div>
-              </div>
-              <!--end col-->
-
+      <div class="col-lg-8 col-12 position-relative">
+        <div class="row">
+          <div class="col-md-6 mt-4 pt-2 ">
+            <div class="border-bottom">
+              <h5>Zmień dane</h5>
             </div>
-            <!--end row-->
-          </form>
+            <form class="login-form" [formGroup]="changeDataForm" #formData="ngForm" (ngSubmit)="changeData(formData)">
+              <div class="row mt-4 ">
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label ">Imię</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="name" type="text" class="form-control ps-5" placeholder="Nowe imię"
+                             [ngClass]="{ 'is-invalid': submitted_data && fChangeData.name.errors }">
+                      <div *ngIf="submitted_data && fChangeData.name.errors" class="invalid-feedback">
+                        <div *ngIf="fChangeData.name.errors.required">Należy podać nowe imię</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
 
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label">Nazwisko</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="lastname" type="text" class="form-control ps-5"
+                             placeholder="Nowe nazwisko"
+                             [ngClass]="{ 'is-invalid': submitted_data && fChangeData.lastName.errors }">
+                      <div *ngIf="submitted_data && fChangeData.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="fChangeData.lastName.errors.required">Należy podać nowe nazwisko</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="email" type="text" class="form-control ps-5" placeholder="Nowy email"
+                             [ngClass]="{ 'is-invalid': submitted_data && fChangeData.email.errors }">
+                      <div *ngIf="submitted_data && fChangeData.email.errors" class="invalid-feedback">
+                        <div *ngIf="fChangeData.email.errors.required">Należy wpisać nowy email</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12 mt-2 mb-0">
+                  <div class="d-grid">
+                    <div *ngIf="showSuccessName" class="alert alert-success" role="alert">
+                      <b>Pomyślnie zmieniono dane.</b></div>
+                    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                  </div>
+                </div>
+                <!--end col-->
+
+              </div>
+              <!--end row-->
+            </form>
+          </div>
+          <!--end col-->
+          <div class="col-md-6 mt-4 pt-2 ">
+            <div class="border-bottom">
+              <h5>Zmień hasło</h5>
+            </div>
+            <form class="login-form" [formGroup]="changePasswordForm" #form="ngForm" (ngSubmit)="changePassword(form)">
+              <div class="row mt-4 ">
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label ">Stare hasło<span class="text-danger">*</span></label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="password" type="password" class="form-control ps-5"
+                             placeholder="Stare hasło" [ngClass]="{ 'is-invalid': submitted && fChangePassword.password.errors }">
+                      <div *ngIf="submitted && fChangePassword.password.errors" class="invalid-feedback">
+                        <div *ngIf="fChangePassword.password.errors.required">Nalezy wpisac stare hasło</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label">Nowe hasło<span class="text-danger">*</span></label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="newPassword" type="password" class="form-control ps-5"
+                             placeholder="Nowe hasło" [ngClass]="{ 'is-invalid': submitted && fChangePassword.newPassword.errors }">
+                      <div *ngIf="submitted && fChangePassword.newPassword.errors" class="invalid-feedback">
+                        <div *ngIf="fChangePassword.newPassword.errors.required">Należy podac nowe hasło</div>
+                        <div *ngIf="fChangePassword.newPassword.errors.mustMatch">Nowe hasło musi się różnić od starego</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12 form-group">
+                  <div class="mb-3">
+                    <label class="form-label">Powtórz nowe hasło<span class="text-danger">*</span></label>
+                    <div class="form-icon position-relative">
+                      <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                      <input formControlName="confirmPassword" type="password" class="form-control ps-5"
+                             placeholder="Powtórz nowe hasło"
+                             [ngClass]="{ 'is-invalid': submitted && fChangePassword.confirmPassword.errors }">
+                      <div *ngIf="submitted && fChangePassword.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="fChangePassword.confirmPassword.errors.required">Powtórzenie hasła jest wymagane</div>
+                        <div *ngIf="fChangePassword.confirmPassword.errors.mustMatch">Hasła muszą się zgadzać</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12 mt-2">
+                  <div class="d-grid">
+                    <span name="information_to_user" class="text-center text-danger">{{information_to_user}}</span>
+                    <div *ngIf="showSuccessPassword" class="alert alert-success" role="alert">
+                      <b>Twój hasło zostało zmienione.</b></div>
+                    <button type="submit" class="btn btn-primary">Zapisz hasło</button>
+                  </div>
+                </div>
+                <!--end col-->
+
+              </div>
+              <!--end row-->
+            </form>
+          </div>
           <!--end col-->
         </div>
+        <!--end row-->
+        <div class="mt-4">
+          <div class="border-bottom">
+            <h5 class="mb-2 text-danger">Usuń konto</h5>
+          </div>
+
+          <div class="mt-2">
+            <h6 class="mb-1">Chcesz usunąć swoje konto? Prosze kliknąć przycisk "Usuń konto" poniżej</h6>
+            <div class="mt-4">
+              <button class="btn btn-danger" (click)="open('focusFirst')">Usuń konto</button>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end row-->
       </div>
       <!--end col-->
     </div>

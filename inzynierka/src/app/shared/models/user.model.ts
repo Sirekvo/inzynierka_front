@@ -1,4 +1,10 @@
 export class TokenOutput {
-    account_id: number;
     token: string;
+}
+export class AccountOutput {
+    account_id: number;
+    email: string;
+    name: string;
+    lastname: string;
+    role: string;
 }

@@ -2,7 +2,7 @@ import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
-import {TokenOutput} from "../models/user.model";
+import {AccountOutput, TokenOutput} from "../models/user.model";
 
 
 @Injectable()
@@ -38,7 +38,7 @@ export class UserService {
             password
         };
 
-        return this.httpClient.post<TokenOutput>(environment.apiUrl + '/login', body);
+        return this.httpClient_withoutToken.post<TokenOutput>(environment.apiUrl + '/login', body);
     }
 
     removeLocalUser() {
@@ -51,7 +51,6 @@ export class UserService {
 
     getToken(): string {
         const user = this.getLocalUser();
-        console.log(user.token)
         if (user) {
             return user.token;
         }
@@ -70,11 +69,28 @@ export class UserService {
         return this.httpClient_withoutToken.post(environment.apiUrl + '/user', body)
     }
 
-    changePassword(account_id: number, password: string): Observable<any> {
+    changePassword(password: number, newPassword: string): Observable<any> {
         const body = {
-            account_id,
-            password
+            password,
+            newPassword
         };
         return this.httpClient.put(environment.apiUrl + '/change-password', body);
+    }
+
+    changeInformation(email: string, name: string, lastname: string): Observable<any> {
+        const body = {
+            email,
+            name,
+            lastname
+        };
+        return this.httpClient.put(environment.apiUrl + '/change-information', body);
+    }
+
+    getInformationAboutUser(): Observable<AccountOutput> {
+        return this.httpClient.get<AccountOutput>(environment.apiUrl + '/user');
+    }
+
+    deleteUser(account_id: number): Observable<any> {
+        return this.httpClient.delete(environment.apiUrl + '/delete-user/' + account_id);
     }
 }
