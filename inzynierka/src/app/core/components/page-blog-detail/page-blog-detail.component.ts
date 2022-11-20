@@ -61,7 +61,7 @@ export class PageBlogDetailComponent implements OnInit {
 
       );
   }
-  fComment(){
+  get fComment(){
       return this.commentForm.controls;
   }
 
@@ -71,11 +71,13 @@ export class PageBlogDetailComponent implements OnInit {
           return;
       }
       else{
-          const currentTime = Intl.DateTimeFormat().resolvedOptions().timeZone.toString()
-          this.postService.postComment(form.value.creator, form.value.comment, this.id, currentTime).subscribe(
+          const now = new Date();
+
+          this.postService.postComment(form.value.name, form.value.comment, this.id, now.toLocaleString()).subscribe(
               (resolve) => {
                   this.submitted = false;
                   form.reset();
+                  this.ngOnInit()
               },
               () => {
                   this.submitted = false;

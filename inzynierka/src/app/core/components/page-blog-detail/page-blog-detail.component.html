@@ -77,8 +77,8 @@
                   <div class="form-icon position-relative">
                     <i-feather name="user" class="fea icon-sm icons"></i-feather>
                     <input  formControlName="name" type="text" placeholder="Nazwa" class="form-control ps-5"
-                           [ngClass]="{ 'is-invalid': submitted && fComment.name.errors }">
-                    <div *ngIf="submitted && fComment.name.erros" class="invalid-feedback">
+                           [ngClass]="{ 'is-invalid': submitted && fComment.name.errors}">
+                    <div *ngIf="submitted && fComment.name.errors" class="invalid-feedback">
                       <div *ngIf="fComment.name.errors.required">Należy podać nazwe</div>
                     </div>
                   </div>
@@ -139,6 +139,9 @@
             <div class="widget mb-4 pb-2">
               <h5 class="widget-title">Premiera</h5>
               <p>{{premiere}}</p>
+            </div>
+            <div class="widget mb-4 pb-2">
+              <button routerLink="/" class="btn btn-primary">Wróć</button>
             </div>
 
 
