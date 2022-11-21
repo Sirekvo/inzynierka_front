@@ -79,4 +79,14 @@ export class PostService {
 
         return this.httpClient_withoutToken.get<Array<CommentsInput>>(environment.apiUrl + '/comment/' + serie_id);
     }
+    editSlider(url: string, slider_id: number): Observable<any>{
+        const body ={
+            url,
+            slider_id
+        }
+        return this.httpClient_withoutToken.put(environment.apiUrl + '/sliders', body);
+    }
+    deleteSlider(slider_id: number): Observable<any>{
+        return this.httpClient_withoutToken.delete(environment.apiUrl + '/sliders/' + slider_id);
+    }
 }

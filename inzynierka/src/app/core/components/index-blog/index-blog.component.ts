@@ -28,6 +28,8 @@ export class IndexBlogComponent implements OnInit {
   postList: Array<PostInput>;
   urlList: Array<UrlInput>;
   three = 3;
+  slider_count: number;
+
 
   constructor(private postService: PostService) { }
 
@@ -41,8 +43,9 @@ export class IndexBlogComponent implements OnInit {
 
       );
       this.postService.getSliderUrl().subscribe(
-          (url: Array<PostInput>) => {
-              this.urlList = url
+          (url: Array<UrlInput>) => {
+              this.urlList = url;
+              this.slider_count= url.length
           },
           () => {
           }

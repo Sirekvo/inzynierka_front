@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {PostInput, PostInputByTitle} from "../../../../shared/models/post.model";
 import {PostService} from "../../../../shared/services/post.service";
 import firebase from "firebase/compat";
 import app = firebase.app;
 import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/compat/storage";
 import {UrlInput} from "../../../../shared/models/image.model";
+import {SlidersComponent} from "../../../../shared/sliders/sliders.component";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-slider-editor',
     templateUrl: './slider-editor.component.html',
     styleUrls: ['./slider-editor.component.css']
 })
-
-/***
- * Blog Component
- */
+@Injectable({
+    providedIn: 'root',
+})
 export class SliderEditorComponent implements OnInit {
 
     /***
@@ -36,15 +37,16 @@ export class SliderEditorComponent implements OnInit {
     information_to_user= '';
     slidersCount: number;
 
+
     constructor(private postService: PostService,
-                private af:AngularFireStorage) { }
+                private af:AngularFireStorage,
+                private router: Router) { }
 
     ngOnInit(): void {
         this.postService.getSliderUrl().subscribe(
-            (url: Array<PostInput>) => {
+            (url: Array<UrlInput>) => {
                 this.urlList = url;
                 this.slidersCount= url.length;
-                console.log(this.slidersCount)
             },
             () => {
             }
@@ -63,12 +65,8 @@ export class SliderEditorComponent implements OnInit {
     }
 
     async uploadImages() {
-        console.log(this.imgSrc);
-        // this.postList.map(t => t.series_id)
         const filePath = `Sliders/${this.imgSrc['name']}`;
-        console.log(filePath);
         const fileRef = this.af.ref(filePath);
-        // this.af.upload("/files"+Math.random()+this.imgSrc,this.imgSrc)
         this.task = this.af.upload(filePath, this.imgSrc);
         (await this.task).ref.getDownloadURL().then(url => {
             this.downloadUrl = url
@@ -83,6 +81,7 @@ export class SliderEditorComponent implements OnInit {
                 this.isVisibleAddSlider = false;
                 this.isVisible = true;
                 this.downloadUrl = '';
+                this.ngOnInit();
         }
 
         )
@@ -95,7 +94,6 @@ export class SliderEditorComponent implements OnInit {
             this.selectedImage = event.target.files[0];
         }
         else{
-            this.imgSrc = "assets/images/blog/add_photo.jpg";
             this.selectedImage = null;
         }
     }

@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-xl-auto col-lg-auto col-md-6 col-6 mt-4 pt-2" *ngFor="let url of urlList">
+<div class="row" *ngIf="isVisible">
+  <div class="col-xl-auto col-lg-auto col-md-6 col-6 mt-4 pt-2" *ngFor="let url of urlList; let indexOfElement= index" >
     <div class="rounded border-0 shadow">
       <div class="position-relative">
         <img src="{{url.url}}" class="card-img-top rounded-top center center"
@@ -7,10 +7,55 @@
       </div>
       <div class="card-body content">
         <div class="post-meta d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-secondary col-md-6"  >Zmień zdjęcie</button>
-          <button type="button" class="btn btn-danger col-md-6"  >Usuń</button>
+          <button type="button" class="btn btn-secondary col-md-6" (click)="edit(indexOfElement, url.slider_id)">Zmień zdjęcie</button>
+          <button type="button" class="btn btn-danger col-md-6" (click)="open('focusFirst', url.slider_id)" >Usuń</button>
         </div>
+        <p class="mt-3 text-center">Pozycja wyświetlania: <b>{{url.position}}</b></p>
+        <div class="container position-relative text-center d-flex justify-content-center" >
+          <div class="post-meta" *ngFor="let in of counter(urlList.length); let i = index">
+            <button type="button" class="btn btn-light" [ngClass]="{'active' : url.position == i+1}" (click)="show(url.slider_id)">{{i+1}}</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="isVisibleEdit" id="slider" class="col-12">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-12 col-md-12">
+      <div class="px-3 py-4">
+        <h4 class="title text-center">Zmień zdjęcie</h4>
+        <div class="row">
+          <div class="col-lg-12 form-group">
+            <div class="mb-3 mt-4">
+              <div class="form-icon position-relative">
+                <img [src]="this.downloadUrl" class="img-fluid rounded-top">
+                <div class="mt-4">
+                  <input type="file" (change)="handleFiles($event)" accept="*.png.jpg.jpeg">
+                  <button type="button" class="btn btn-primary" (click) = uploadImages()>Dodaj zdjęcie</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-0">
+            <div class="d-grid">
+              <button class="btn btn-secondary" type="button" (click)="back_to_start()">Pomiń</button>
+            </div>
+          </div>
+          <div class="col mb-0">
+            <div class="d-grid">
+              <button class="btn btn-primary" type="submit" (click)="submit()">Gotowe
+              </button>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+      </div>
+      <!---->
+    </div>
+    <!--end col-->
+  </div>
+  <!--end row-->
 </div>
