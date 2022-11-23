@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/compat/storage";
 import {ModalDismissReasons, NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SliderEditorComponent} from "../../core/components/admin-settings/slider-editor/slider-editor.component";
+import {UrlInput} from "../models/image.model";
 
 @Component({
     selector: 'ngbd-modal-confirm',
@@ -49,7 +50,7 @@ export class SlidersComponent implements OnInit {
 
     @Input() urlList: Array<{
         url: string;
-        slider_id
+        slider_id: number;
     }>;
 
 
@@ -63,6 +64,8 @@ export class SlidersComponent implements OnInit {
     selectedImage : any = null;
     // postList: Array<PostInput>;
 
+
+
     constructor(private postService: PostService,
                 private router: Router,
                 private af:AngularFireStorage,
@@ -71,6 +74,8 @@ export class SlidersComponent implements OnInit {
                 ) { }
 
     ngOnInit(): void {
+
+
         // this.postService.getPost().subscribe(
         //     (post: Array<PostInput>) => {
         //       this.postList = post;
@@ -91,11 +96,12 @@ export class SlidersComponent implements OnInit {
         this.isVisibleEdit = false;
         this.downloadUrl = '';
     }
-    open(name: string, id: number) {
+    open(name: string, id: number, url: string) {
         this._modalService.open(MODALS[name]).result.then((result) => {
             if (result == 'Ok click') {
                 this.postService.deleteSlider(id).subscribe(
                     (resolve) => {
+                        this.af.refFromURL(url).delete();
                         this.slider.ngOnInit();
                     }
                 )
@@ -159,7 +165,64 @@ export class SlidersComponent implements OnInit {
             this.selectedImage = null;
         }
     }
-    show(id: number){
-        console.log(id);
+    show(position: number, index: number){
+        console.log(position);
+        console.log(index);
+        if(position==2 && index == 0){
+            var tmp = this.urlList[0];
+            this.urlList[0] = this.urlList[1];
+            this.urlList[1] = tmp
+            this.postService.sendSliderUrl(this.urlList).subscribe(
+                (resolve) =>{
+                    this.ngOnInit();
+                }
+            )
+        } else if(position == 3 && index == 0){
+            var tmp = this.urlList[0];
+            this.urlList[0] = this.urlList[2];
+            this.urlList[2] = tmp
+            this.postService.sendSliderUrl(this.urlList).subscribe(
+                (resolve) =>{
+                    this.ngOnInit();
+                }
+            )
+        }else if(position == 1 && index == 1){
+            var tmp = this.urlList[1];
+            this.urlList[1] = this.urlList[0];
+            this.urlList[0] = tmp
+            this.postService.sendSliderUrl(this.urlList).subscribe(
+                (resolve) =>{
+                    this.ngOnInit();
+                }
+            )
+        } else if(position == 3 && index == 1){
+            var tmp = this.urlList[1];
+            this.urlList[1] = this.urlList[2];
+            this.urlList[2] = tmp
+            this.postService.sendSliderUrl(this.urlList).subscribe(
+                (resolve) =>{
+                    this.ngOnInit();
+                }
+            )
+        }else if(position == 1 && index == 2){
+            var tmp = this.urlList[2];
+            this.urlList[2] = this.urlList[0];
+            this.urlList[0] = tmp
+            this.postService.sendSliderUrl(this.urlList).subscribe(
+                (resolve) =>{
+                    this.ngOnInit();
+                }
+            )
+        }else if(position == 2 && index == 2){
+            var tmp = this.urlList[2];
+            this.urlList[2] = this.urlList[1];
+            this.urlList[1] = tmp
+            this.postService.sendSliderUrl(this.urlList).subscribe(
+                (resolve) =>{
+                    this.ngOnInit();
+                }
+            )
+        }
+
     }
 }

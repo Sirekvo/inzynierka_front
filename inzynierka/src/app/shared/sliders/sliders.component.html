@@ -8,12 +8,12 @@
       <div class="card-body content">
         <div class="post-meta d-flex justify-content-between mt-3">
           <button type="button" class="btn btn-secondary col-md-6" (click)="edit(indexOfElement, url.slider_id)">Zmień zdjęcie</button>
-          <button type="button" class="btn btn-danger col-md-6" (click)="open('focusFirst', url.slider_id)" >Usuń</button>
+          <button type="button" class="btn btn-danger col-md-6" (click)="open('focusFirst', url.slider_id, url.url)" >Usuń</button>
         </div>
-        <p class="mt-3 text-center">Pozycja wyświetlania: <b>{{url.position}}</b></p>
+        <p class="mt-3 text-center">Pozycja wyświetlania:</p>
         <div class="container position-relative text-center d-flex justify-content-center" >
           <div class="post-meta" *ngFor="let in of counter(urlList.length); let i = index">
-            <button type="button" class="btn btn-light" [ngClass]="{'active' : url.position == i+1}" (click)="show(url.slider_id)">{{i+1}}</button>
+            <button type="button" class="btn btn-light" [ngClass]="{'active fw-bold' : indexOfElement == i}" (click)="show(i+1, indexOfElement)">{{i+1}}</button>
           </div>
         </div>
 

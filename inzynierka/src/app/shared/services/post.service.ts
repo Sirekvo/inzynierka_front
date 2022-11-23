@@ -57,11 +57,12 @@ export class PostService {
     getPostByTitle(title : string): Observable<Array<PostInputByTitle>> {
         return this.httpClient_withoutToken.get<Array<PostInputByTitle>>(environment.apiUrl + '/findBy/' + title);
     }
-    sendSliderUrl(url: string): Observable<any>{
-        const body = {
-            url
-        }
-        return this.httpClient_withoutToken.post(environment.apiUrl + '/sliders', body)
+    sendSliderUrl(sliderList : Array<UrlInput>): Observable<any>{
+        const httpOptions = {
+            headers: new HttpHeaders({'Content-Type': 'application/json'})
+        };
+
+        return this.httpClient_withoutToken.post(environment.apiUrl + '/sliders', JSON.stringify(sliderList), httpOptions)
     }
     getSliderUrl(): Observable<Array<UrlInput>> {
         return this.httpClient_withoutToken.get<Array<UrlInput>>(environment.apiUrl + '/sliders')

@@ -36,6 +36,7 @@ export class SliderEditorComponent implements OnInit {
     isVisibleAddSlider= false;
     information_to_user= '';
     slidersCount: number;
+     sliderList: Array<UrlInput>;
 
 
     constructor(private postService: PostService,
@@ -76,7 +77,10 @@ export class SliderEditorComponent implements OnInit {
         this.imgSrc = $event.target.files[0];
     }
     submit(){
-        this.postService.sendSliderUrl(this.downloadUrl).subscribe(
+        const slider = new UrlInput();
+        slider.url = this.downloadUrl;
+        this.urlList.push(slider);
+        this.postService.sendSliderUrl(this.urlList).subscribe(
             (resolve) =>{
                 this.isVisibleAddSlider = false;
                 this.isVisible = true;
