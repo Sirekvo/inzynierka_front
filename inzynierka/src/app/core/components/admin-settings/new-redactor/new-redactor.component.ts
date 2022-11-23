@@ -7,6 +7,7 @@ import {UrlInput} from "../../../../shared/models/image.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../shared/services/user.service";
 import {resolveUrl} from "ajv/dist/compile/resolve";
+import {MustMatch, MustMatch2} from "../../../../shared/match_validator/must_match.validator";
 
 @Component({
     selector: 'app-new-redactor',
@@ -45,10 +46,13 @@ export class NewRedactorComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             email: new FormControl('', [Validators.required]),
             password: new FormControl('', [Validators.required]),
+            confirmPassword: new FormControl('', [Validators.required]),
             name: new FormControl('', [Validators.required]),
             lastName: new FormControl('', [Validators.required]),
             role: new FormControl(''),
-        }, {});
+        }, {
+            validators: [MustMatch('password', 'confirmPassword')]
+        });
     }
     get fRegister(){
         return this.registerForm.controls;

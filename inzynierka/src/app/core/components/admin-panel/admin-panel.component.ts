@@ -4,6 +4,8 @@ import {PostService} from "../../../shared/services/post.service";
 import firebase from "firebase/compat";
 import app = firebase.app;
 import {UrlInput} from "../../../shared/models/image.model";
+import {AccountOutput} from "../../../shared/models/user.model";
+import {UserService} from "../../../shared/services/user.service";
 
 @Component({
     selector: 'app-admin-panel',
@@ -28,8 +30,10 @@ export class AdminPanelComponent implements OnInit {
     showNavigationIndicators = false;
     postList: Array<PostInput>;
     newPostList: Array<PostInputByTitle>;
+    role: string;
 
-    constructor(private postService: PostService) { }
+    constructor(private postService: PostService,
+                private userService: UserService) { }
 
     ngOnInit(): void {
         this.postService.getPost().subscribe(
@@ -40,6 +44,11 @@ export class AdminPanelComponent implements OnInit {
             }
 
         );
+        this.userService.getInformationAboutUser().subscribe(
+            (information: AccountOutput) => {
+                this.role = information.role;
+            }
+        )
     }
     findByTitle(form){
         if(form.value.title){

@@ -107,7 +107,7 @@
                   <div class="mb-3">
                     <label class="form-label ">Imię</label>
                     <div class="form-icon position-relative">
-                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
                       <input formControlName="name" type="text" class="form-control ps-5" placeholder="Nowe imię"
                              [ngClass]="{ 'is-invalid': submitted_data && fChangeData.name.errors }">
                       <div *ngIf="submitted_data && fChangeData.name.errors" class="invalid-feedback">
@@ -122,7 +122,7 @@
                   <div class="mb-3">
                     <label class="form-label">Nazwisko</label>
                     <div class="form-icon position-relative">
-                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
                       <input formControlName="lastname" type="text" class="form-control ps-5"
                              placeholder="Nowe nazwisko"
                              [ngClass]="{ 'is-invalid': submitted_data && fChangeData.lastName.errors }">
@@ -137,7 +137,7 @@
                   <div class="mb-3">
                     <label class="form-label">Email</label>
                     <div class="form-icon position-relative">
-                      <i-feather name="edit2" class="fea icon-sm icons"></i-feather>
+                      <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
                       <input formControlName="email" type="text" class="form-control ps-5" placeholder="Nowy email"
                              [ngClass]="{ 'is-invalid': submitted_data && fChangeData.email.errors }">
                       <div *ngIf="submitted_data && fChangeData.email.errors" class="invalid-feedback">
@@ -172,7 +172,7 @@
                   <div class="mb-3">
                     <label class="form-label ">Stare hasło<span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
-                      <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                      <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
                       <input formControlName="password" type="password" class="form-control ps-5"
                              placeholder="Stare hasło" [ngClass]="{ 'is-invalid': submitted && fChangePassword.password.errors }">
                       <div *ngIf="submitted && fChangePassword.password.errors" class="invalid-feedback">
@@ -187,7 +187,7 @@
                   <div class="mb-3">
                     <label class="form-label">Nowe hasło<span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
-                      <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                      <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
                       <input formControlName="newPassword" type="password" class="form-control ps-5"
                              placeholder="Nowe hasło" [ngClass]="{ 'is-invalid': submitted && fChangePassword.newPassword.errors }">
                       <div *ngIf="submitted && fChangePassword.newPassword.errors" class="invalid-feedback">
@@ -203,7 +203,7 @@
                   <div class="mb-3">
                     <label class="form-label">Powtórz nowe hasło<span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
-                      <i-feather name="key" class="fea icon-sm icons"></i-feather>
+                      <i-feather name="key" class="fea icon-sm icons d-flex"></i-feather>
                       <input formControlName="confirmPassword" type="password" class="form-control ps-5"
                              placeholder="Powtórz nowe hasło"
                              [ngClass]="{ 'is-invalid': submitted && fChangePassword.confirmPassword.errors }">
