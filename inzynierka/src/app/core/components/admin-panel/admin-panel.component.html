@@ -1,9 +1,9 @@
 <!-- Hero Start -->
-<div class="back-to-home rounded">
+<div *ngIf="mobile" class="back-to-home rounded">
   <div class="btn-group dropdown-primary" ngbDropdown>
     <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
             aria-haspopup="true" aria-expanded="false">
-      Piotr Świerczyński
+      Menu
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/main">Profil</a>
@@ -18,30 +18,29 @@
   </div>
 </div>
 
-
-<section class="bg-profile d-table w-100 bg-dark mb-5" style="background: url('assets/images/blog/bg.png') center center;">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="public-profile card rounded shadow-sm">
-          <div class="card-body">
-            <div class="col-lg-12 col-md-12">
-              <div class="row align-items-end">
-              <h2 class="text-center">Panel administratorski</h2>
-                <!--end col-->
-              </div>
-              <!--end row-->
-            </div>
-            <!--end row-->
-          </div>
-        </div>
-      </div>
-      <!--end col-->
-    </div>
-    <!--end row-->
-  </div>
-  <!--ed container-->
-</section>
+<!--<section class="bg-profile d-table w-100 bg-dark mb-5" style="background: url('assets/images/blog/bg.png') center center;">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-12">-->
+<!--        <div class="public-profile card rounded shadow-sm">-->
+<!--          <div class="card-body">-->
+<!--            <div class="col-lg-12 col-md-12">-->
+<!--              <div class="row align-items-end">-->
+<!--              <h2 class="text-center">Panel administratorski</h2>-->
+<!--                &lt;!&ndash;end col&ndash;&gt;-->
+<!--              </div>-->
+<!--              &lt;!&ndash;end row&ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash;end row&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;end col&ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash;end row&ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash;ed container&ndash;&gt;-->
+<!--</section>-->
 <!--end section-->
 <!-- Hero End -->
 
@@ -50,7 +49,7 @@
 
   <div class="container-fluid custom-container">
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-4 d-lg-block d-none">
+      <div *ngIf="isVisible_list" class="col-lg-3 col-md-4 col-4 d-lg-block d-none">
         <div class="sidebar sticky-bar px-4 rounded shadow">
           <div class="widget">
             <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
@@ -105,7 +104,7 @@
             </a>
           </div>
           <hr>
-          <div class="col-md-8">
+          <div class="col-md-6">
             <div class=" blog-search">
               <div class="row justify-content-center">
                 <div class="text-center subcribe-form">
@@ -172,52 +171,6 @@
       </div>
       <!--end col-->
 
-<!--      <form style="max-width: 100px;">-->
-<!--        <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-<!--               placeholder="Search keywords...">-->
-<!--        <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-<!--      </form>-->
-<!--      <div class="row">-->
-<!--        <div class="col-lg-3">-->
-<!--          <div class="features-absolute blog-search">-->
-<!--            <div class="row justify-content-center">-->
-<!--              <div class="col-md-10">-->
-<!--                <div class="text-center subcribe-form">-->
-<!--                  <form style="max-width: 800px;">-->
-<!--                    <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-<!--                           placeholder="Search keywords...">-->
-<!--                    <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-<!--                  </form>-->
-<!--                  &lt;!&ndash;end form&ndash;&gt;-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              &lt;!&ndash;end col&ndash;&gt;-->
-<!--            </div>-->
-<!--            &lt;!&ndash;end row&ndash;&gt;-->
-<!--          </div>-->
-<!--          &lt;!&ndash;end div&ndash;&gt;-->
-<!--        </div>-->
-<!--        &lt;!&ndash;end col&ndash;&gt;-->
-<!--      </div>-->
-      <!--end row-->
-      <div class="col-md-6">
-        <div class=" blog-search">
-          <div class="row justify-content-center">
-            <div class="text-center subcribe-form">
-              <form #f=ngForm (keyup)="findByTitle(f)">
-                <input type="text" name="title" class="rounded-pill shadow-md bg-white"
-                       placeholder="Szukaj po nazwie..." ngModel>
-                <button type="submit" class="btn btn-pills btn-primary">Szukaj</button>
-              </form>
-              <!--end form-->
-            </div>
-            <!--end col-->
-          </div>
-          <!--end row-->
-        </div>
-        <!--end div-->
-      </div>
-      <!--end col-->
       <div class="col-md-3 mt-4 mt-sm-0">
         <div class="text-center text-md-end">
           <a href="/post-creator" class="btn btn-soft-primary">Dodaj nowy post
@@ -228,6 +181,7 @@
       <!--end col-->
     </div>
     <!--end row-->
+
     <app-blog-admin [postList]="postList"></app-blog-admin>
     <div class="col-12 mt-4 pt-2">
       <div class="text-center">

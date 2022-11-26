@@ -2,7 +2,7 @@ import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
-import {AccountOutput, TokenOutput} from "../models/user.model";
+import {AccountOutput, EmailOutput, TokenOutput} from "../models/user.model";
 
 
 @Injectable()
@@ -93,4 +93,8 @@ export class UserService {
     deleteUser(account_id: number): Observable<any> {
         return this.httpClient.delete(environment.apiUrl + '/delete-user/' + account_id);
     }
+    existsEmail(email: string): Observable<Array<EmailOutput>> {
+        return this.httpClient.get<Array<EmailOutput>>(environment.apiUrl + '/check-email/' + email);
+    }
+
 }

@@ -38,6 +38,7 @@ export class NewRedactorComponent implements OnInit {
     success = false;
     role: Array<string> = ['redaktor','admin'];
     role_select = this.role[0];
+    information_to_user = '';
 
     constructor(private userService: UserService,
                 private formBuilder: FormBuilder,) { }
@@ -64,16 +65,26 @@ export class NewRedactorComponent implements OnInit {
         if(this.registerForm.invalid){
             return;
         } else {
-            this.userService.registerUser(form.value.email,form.value.password, form.value.name, form.value.lastName, this.role_select).subscribe(
-                (resolve) => {
-                    console.log("succes");
-                    this.submitted = false;
-                    this.success = true;
-                },
-                () =>{
-                    this.submitted = false;
+            this.userService.existsEmail(form.value.email).subscribe(
+                (data: any) => {
+                    if(data.exist == false){
+                        this.userService.registerUser(form.value.email,form.value.password, form.value.name, form.value.lastName, this.role_select).subscribe(
+                            (resolve) => {
+                                this.submitted = false;
+                                this.success = true;
+                                this.information_to_user = '';
+                            },
+                            () =>{
+                                this.information_to_user = '';
+                                this.submitted = false;
+                            }
+                        )
+                    } else {
+                        this.information_to_user = 'Podany adres e-mail jest już zajęty';
+                    }
                 }
             )
+
         }
     }
     selectOptionHandler(event: any) {

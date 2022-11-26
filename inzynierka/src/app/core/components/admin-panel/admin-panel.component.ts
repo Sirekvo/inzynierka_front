@@ -31,11 +31,18 @@ export class AdminPanelComponent implements OnInit {
     postList: Array<PostInput>;
     newPostList: Array<PostInputByTitle>;
     role: string;
+    mobile = false;
+    isVisible_list = true;
 
     constructor(private postService: PostService,
                 private userService: UserService) { }
 
     ngOnInit(): void {
+        if (window.innerWidth <= 991) { // 768px portrait
+            this.mobile = true;
+        }
+        window.onresize = () => this.mobile = window.innerWidth <= 991;
+
         this.postService.getPost().subscribe(
             (post: Array<PostInput>) => {
                 this.postList = post;
@@ -49,6 +56,7 @@ export class AdminPanelComponent implements OnInit {
                 this.role = information.role;
             }
         )
+
     }
     findByTitle(form){
         if(form.value.title){

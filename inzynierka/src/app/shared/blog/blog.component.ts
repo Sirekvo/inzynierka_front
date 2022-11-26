@@ -37,13 +37,10 @@ export class BlogComponent implements OnInit {
                 this.howMany=2;
             }
         }
-
+        window.onresize = () => this.mobile = window.innerWidth <= 991;
     }
     showPost(id: number){
         this.router.navigate(['/post-detail', id]);
     }
-
-
-
 
 }

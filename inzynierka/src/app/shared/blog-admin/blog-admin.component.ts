@@ -1,8 +1,39 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {PostInput} from "../models/post.model";
+import {Component, OnInit, Input, Type} from '@angular/core';
+import {PostInput, PostInputByTitle} from "../models/post.model";
 import {PostService} from "../services/post.service";
 import {Router} from "@angular/router";
+import {ModalDismissReasons, NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
+@Component({
+  selector: 'ngbd-modal-confirm',
+  template: `
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Usuwanie posta</h4>
+        <button type="button" class="btn-close" aria-describedby="modal-title"
+                (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Czy na pewno chcesz usunąć ten post?</strong>
+        </p>
+          <span class="text-danger">Tej operacji nie można cofnąć.</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Anuluj</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')" click="deleteUser()">Potwierdź
+        </button>
+      </div>
+    `
+})
+
+export class NgbdModalConfirm {
+  constructor(public modal: NgbActiveModal) {
+  }
+}
+
+const MODALS: { [name: string]: Type<any> } = {
+  focusFirst: NgbdModalConfirm,
+  // autofocus: NgbdModalConfirmAutofocus
+};
 @Component({
   selector: 'app-blog-admin',
   templateUrl: './blog-admin.component.html',
@@ -21,33 +52,41 @@ export class BlogAdminComponent implements OnInit {
     url: string;
   }>;
 
-  // postList: Array<PostInput>;
+  web = true;
+  mobile = false;
 
   constructor(private postService: PostService,
-              private router: Router) { }
+              private router: Router,
+              private _modalService: NgbModal) { }
 
   ngOnInit(): void {
-    // this.postService.getPost().subscribe(
-    //     (post: Array<PostInput>) => {
-    //       this.postList = post;
-    //     },
-    //     () => {
-    //     }
-    //
-    // );
+    if (window.innerWidth <= 991) { // 768px portrait
+      this.mobile = true;
+      this.web = false;
+    }
+    window.onresize = () => this.mobile = window.innerWidth <= 991;
   }
-  deletePost(id){
-    this.postService.deletePost(id).subscribe(
-        (result) => {
-          this.ngOnInit();
-        },
-    );
-  }
+
   editPost(id: number){
     this.router.navigate(['/post-edition', id]);
   }
-
-
+  open(name: string, id: number) {
+    this._modalService.open(MODALS[name]).result.then((result) => {
+      if (result == 'Ok click') {
+        this.postService.deletePost(id).subscribe(
+            (result) => {
+              this.ngOnInit();
+            },
+        );
+      }
+    }, (reason) => {
+      if (reason === ModalDismissReasons.ESC ||
+          reason === ModalDismissReasons.BACKDROP_CLICK ||
+          reason == 'cancel click' ||
+          reason == 'Cross click') {
+      }
+    });
+  }
 
 
 }

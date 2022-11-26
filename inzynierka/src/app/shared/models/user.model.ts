@@ -8,3 +8,6 @@ export class AccountOutput {
     lastname: string;
     role: string;
 }
+export class EmailOutput {
+    exists: boolean;
+}

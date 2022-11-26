@@ -2,16 +2,16 @@
     <div class="col-xl-auto col-lg-auto col-md-6 col-6 mt-4 pt-2" *ngFor="let post of postList | orderBy: '-'">
         <div class="card blog rounded border-0 shadow">
             <div class="position-relative">
-                <img src="{{post.url}}" class="card-img-top rounded-top center center"
-                     alt="..." style="width:24em; height:17em;">
+                <img [ngClass]="{'imgHeightWeb': web, 'imgHeightMobile': mobile}" src="{{post.url}}" class="card-img-top rounded-top center center imgHeightMobile imgHeightWeb"
+                     alt="...">
                 <div class="overlay rounded-top bg-dark"></div>
             </div>
             <div class="card-body content">
                 <h5><a href="javascript:void(0)" class="card-title title text-dark">{{post.title}}</a>
                 </h5>
-                <div class="post-meta d-flex justify-content-between mt-3">
-                    <button type="button" class="btn btn-secondary col-md-6" (click)="editPost(post.series_id)" >Edytuj</button>
-                    <button type="button" class="btn btn-danger col-md-6" (click)="deletePost(post.series_id)" >Usuń</button>
+                <div class="row post-meta d-flex justify-content-between position-relative mt-3" >
+                    <button type="button" class="btn btn-secondary col-md-6 col-12" (click)="editPost(post.series_id)" >Edytuj</button>
+                    <button type="button" class="btn btn-danger col-md-6 col-12" (click)="open('focusFirst', post.series_id)" >Usuń</button>
                 </div>
             </div>
         </div>
