@@ -17,6 +17,8 @@ export class PostInputById {
     premiere : string;
     description : string;
     url : string;
+    creation_date: string;
+
 }
 export class PostInputByTitle {
     series_id : number;
@@ -27,6 +29,8 @@ export class PostInputByTitle {
     premiere : string;
     description : string;
     url : string;
+    post_creator: string;
+    creation_date: string;
 }
 export class CommentsInput {
     comment_id: number;

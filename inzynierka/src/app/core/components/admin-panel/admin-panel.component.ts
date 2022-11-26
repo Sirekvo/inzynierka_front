@@ -33,6 +33,9 @@ export class AdminPanelComponent implements OnInit {
     role: string;
     mobile = false;
     isVisible_list = true;
+    activeToggle = 1;
+    checked = false;
+    checked2= false;
 
     constructor(private postService: PostService,
                 private userService: UserService) { }
@@ -54,6 +57,12 @@ export class AdminPanelComponent implements OnInit {
         this.userService.getInformationAboutUser().subscribe(
             (information: AccountOutput) => {
                 this.role = information.role;
+                this.activeToggle = information.view;
+                if(this.activeToggle == 1){
+                    this.checked = true
+                }else{
+                    this.checked2 = true;
+                }
             }
         )
 
@@ -73,5 +82,24 @@ export class AdminPanelComponent implements OnInit {
         }
 
     }
+    checkSelected() {
+        this.activeToggle = 1;
+        this.checked = true;
+        this.checked2 = false;
+        this.userService.changeView(1).subscribe(
+            () =>{
 
+            }
+        )
+    }
+    checkSelected2() {
+        this.activeToggle = 2;
+        this.checked = false;
+        this.checked2 = true;
+        this.userService.changeView(2).subscribe(
+            () =>{
+
+            }
+        )
+    }
 }

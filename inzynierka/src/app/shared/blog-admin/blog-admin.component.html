@@ -1,9 +1,39 @@
-<div class="row">
+<table class=" table mb-0 table-center mt-3" [ngClass]="{'d-none': view == 1}">
+    <thead>
+    <tr>
+        <th scope="col" class="border-bottom" style="width:3%;">#</th>
+        <th scope="col" class="border-bottom" style="width:25%;">Tytuł</th>
+        <th scope="col" class="border-bottom" style="width:25%;">Napisał</th>
+        <th scope="col" class="border-bottom" style="width:20%;">Zdjecie wyrózniające</th>
+        <th *ngIf="web" scope="col" class="border-bottom" style="width:20%;">Data utworzenia</th>
+        <th scope="col" class="border-bottom" style="width:10%;">Opcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let post of postList | orderBy: '-';  let indexOfElement=index;">
+        <td class="align-middle">{{indexOfElement + 1}}</td>
+        <td class="align-middle">{{post.title}}</td>
+        <td class="align-middle">{{post.post_creator}}</td>
+        <td class="align-middle"><img [ngClass]="{'imgHeightWeb2': web, 'imgHeightMobile2': mobile}" src="{{post.url}}" class="card-img-top rounded-top center center"></td>
+        <td class="align-middle" *ngIf="web">{{post.creation_date}}</td>
+        <td class="align-middle"><div class="btn-group dropdown-primary" ngbDropdown>
+            <button type="button button" class="btn btn-white"  ngbDropdownToggle>
+                <b>...</b>
+            </button>
+            <div class="dropdown-men" ngbDropdownMenu>
+                <a class="dropdown-item"(click)="showPost(post.series_id)"><span class="h5"><i class="uil uil-search-alt"></i></span> Podgląd</a>
+                <a class="dropdown-item"(click)="editPost(post.series_id)"><span class="h5"><i class="uil uil-edit-alt"></i></span> Edytuj</a>
+                <a class="dropdown-item"(click)="open('focusFirst', post.series_id)"><span class="h5"><i class="uil uil-trash-alt"></i></span> Usuń</a>
+            </div>
+        </div></td>
+    </tr>
+    </tbody>
+</table>
+<div class="row" [ngClass]="{'d-none': view == 2}">
     <div class="col-xl-auto col-lg-auto col-md-6 col-6 mt-4 pt-2" *ngFor="let post of postList | orderBy: '-'">
         <div class="card blog rounded border-0 shadow">
             <div class="position-relative">
-                <img [ngClass]="{'imgHeightWeb': web, 'imgHeightMobile': mobile}" src="{{post.url}}" class="card-img-top rounded-top center center imgHeightMobile imgHeightWeb"
-                     alt="...">
+                <img [ngClass]="{'imgHeightWeb': web, 'imgHeightMobile': mobile}" src="{{post.url}}" class="card-img-top rounded-top center center imgHeightMobile imgHeightWeb">
                 <div class="overlay rounded-top bg-dark"></div>
             </div>
             <div class="card-body content">
@@ -11,7 +41,7 @@
                 </h5>
                 <div class="row post-meta d-flex justify-content-between position-relative mt-3" >
                     <button type="button" class="btn btn-secondary col-md-6 col-12" (click)="editPost(post.series_id)" >Edytuj</button>
-                    <button type="button" class="btn btn-danger col-md-6 col-12" (click)="open('focusFirst', post.series_id)" >Usuń</button>
+                    <button type="button" class="btn btn-danger col-md-6 col-12" (click)="open('focusFirst', post.series_id)">Usuń</button>
                 </div>
             </div>
         </div>

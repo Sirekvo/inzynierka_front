@@ -15,14 +15,6 @@ import {UrlInput} from "../../../shared/models/image.model";
  */
 export class IndexBlogComponent implements OnInit {
 
-  /***
-   * Nav bg light calss Add
-   */
-  navClass = 'bg-black';
-
-  /***
-   * Main Slider navigation Add
-   */
   showNavigationArrows = true;
   showNavigationIndicators = false;
   postList: Array<PostInput>;

@@ -51,6 +51,7 @@ export class BlogAdminComponent implements OnInit {
     description: string;
     url: string;
   }>;
+  @Input() view: number;
 
   web = true;
   mobile = false;
@@ -87,6 +88,8 @@ export class BlogAdminComponent implements OnInit {
       }
     });
   }
-
+  showPost(id: number){
+    this.router.navigate(['/post-detail', id]);
+  }
 
 }

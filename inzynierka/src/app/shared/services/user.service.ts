@@ -96,5 +96,11 @@ export class UserService {
     existsEmail(email: string): Observable<Array<EmailOutput>> {
         return this.httpClient.get<Array<EmailOutput>>(environment.apiUrl + '/check-email/' + email);
     }
+    changeView(view: number): Observable<any> {
+        const body = {
+            view,
+        }
+        return this.httpClient.put(environment.apiUrl + '/change-view', body);
+    }
 
 }

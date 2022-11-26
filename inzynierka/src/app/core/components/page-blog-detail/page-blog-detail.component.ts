@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {CommentsInput, PostInputById} from "../../../shared/models/post.model";
 import {NgbDate, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {PostService} from "../../../shared/services/post.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AccountOutput} from "../../../shared/models/user.model";
+import {UserService} from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-page-blog-detail',
@@ -23,12 +25,15 @@ export class PageBlogDetailComponent implements OnInit {
   downloadUrl: string;
   submitted = false;
   commentForm: FormGroup;
+  role = '';
 
   commentsList: Array<CommentsInput>;
 
   constructor(private postService: PostService,
               private route: ActivatedRoute,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private userService: UserService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.commentForm = this.formBuilder.group({
@@ -60,6 +65,11 @@ export class PageBlogDetailComponent implements OnInit {
           }
 
       );
+      this.userService.getInformationAboutUser().subscribe(
+          (information: AccountOutput) => {
+              this.role = information.role;
+          }
+      )
   }
   get fComment(){
       return this.commentForm.controls;
@@ -83,6 +93,13 @@ export class PageBlogDetailComponent implements OnInit {
                   this.submitted = false;
               }
           )
+      }
+  }
+  back(){
+      if(this.role == ''){
+          this.router.navigate(['/']);
+      }else{
+          this.router.navigate(['/admin']);
       }
   }
 }

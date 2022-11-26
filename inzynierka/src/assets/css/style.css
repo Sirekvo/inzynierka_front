@@ -1150,7 +1150,7 @@ button:not(:disabled) {
     padding: 150px 0;
     height: auto;
   }
-  
+
   .attach-icons-hero {
     border-bottom: 1px solid #e9ecef;
   }
@@ -1556,7 +1556,7 @@ button:not(:disabled) {
   display: none !important;
 }
 .twentytwenty-overlay:hover {
-    background: rgba(60, 72, 88, 0.05); 
+    background: rgba(60, 72, 88, 0.05);
 }
 .twentytwenty-handle {
     background: #2f55d4;

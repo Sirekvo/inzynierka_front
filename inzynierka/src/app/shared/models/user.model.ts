@@ -7,6 +7,7 @@ export class AccountOutput {
     name: string;
     lastname: string;
     role: string;
+    view: number;
 }
 export class EmailOutput {
     exists: boolean;
