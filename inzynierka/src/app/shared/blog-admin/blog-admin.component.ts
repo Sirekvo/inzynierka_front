@@ -19,7 +19,7 @@ import {ModalDismissReasons, NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bo
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Anuluj</button>
-        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')" click="deleteUser()">Potwierdź
+        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Potwierdź
         </button>
       </div>
     `
@@ -90,6 +90,15 @@ export class BlogAdminComponent implements OnInit {
   }
   showPost(id: number){
     this.router.navigate(['/post-detail', id]);
+  }
+  onResize(event) {
+    if (event.target.innerWidth <= 991) { // 768px portrait
+      this.web = false;
+      this.mobile = true;
+    }else{
+      this.web = true;
+      this.mobile = false;
+    }
   }
 
 }

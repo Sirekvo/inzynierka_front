@@ -1,105 +1,88 @@
 <!-- Hero Start -->
-<div class="back-to-home rounded">
+<div *ngIf="mobile" class="back-to-home rounded mx-4">
   <div class="btn-group dropdown-primary" ngbDropdown>
-    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
+    <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
             aria-haspopup="true" aria-expanded="false">
-      Piotr Świerczyński
+      Menu
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
-      <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/main">Profil</a>
-      <a class="dropdown-item">Dodaj nowego redaktora</a>
-      <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
-      <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
-      <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
+      <a class="dropdown-item"  routerLink="/admin">Wszystkie posty</a>
+      <a class="dropdown-item" routerLink="/sliders">Slider</a>
+      <a class="dropdown-item" routerLink="/new-redactor" *ngIf="role == 'admin'">Dodaj / usuń redaktora</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" routerLink="/settings">Ustawienia</a>
+      <a class="dropdown-item" style="background: #26264f; color: white" routerLink="/settings">Ustawienia</a>
       <a class="dropdown-item"  routerLink="/login"><b>Wyloguj się</b></a>
     </div>
   </div>
 </div>
 
-
-<section class="bg-profile d-table w-100 bg-dark mb-5" style="background: url('assets/images/blog/bg.png') center center;">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="public-profile card rounded shadow-sm">
-          <div class="card-body">
-            <div class="col-lg-12 col-md-12">
-              <div class="row align-items-end">
-                <h2 class="text-center">Panel administratorski</h2>
-                <!--end col-->
-              </div>
-              <!--end row-->
-            </div>
-            <!--end row-->
-          </div>
-        </div>
-      </div>
-      <!--end col-->
-    </div>
-    <!--end row-->
-  </div>
-  <!--ed container-->
-</section>
-<!--end section-->
-<!-- Hero End -->
-
 <!-- Profile Start -->
-<section class="section mt-60">
+<section class="section" (window:resize)="onResize($event)">
+  <div class="row">
+    <div class="col-xl-2 col-lg-3 col-md-4 col-4 d-lg-block d-none" style="background-color: #1d1e42; min-height: 100vh">
+      <div class=" px-4 sticky-bar">
+        <div class="widget">
+          <h3 class="text-white mt-3 ps-4">Admin panel</h3>
+          <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
+            <li class="navbar-item account-menu px-0">
+              <a routerLink="/admin" class="navbar-link d-flex align-items-center py-2 px-4">
+                <span class="h4 mb-0"><i class="uil uil-create-dashboard"></i></span>
+                <h6 class="mb-0 ms-2 ">Wszystkie posty</h6>
+              </a>
+            </li>
 
-  <div class="container-fluid custom-container">
-    <div class="row">
-      <div class="col-lg-3 col-md-4 col-4 d-lg-block d-none">
-        <div class="sidebar sticky-bar px-4 rounded shadow">
-          <div class="widget">
-            <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
-              <li class="navbar-item account-menu px-0">
-                <a routerLink="/admin" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-user-circle"></i></span>
-                  <h6 class="mb-0 ms-2 ">Profil</h6>
-                </a>
-              </li>
+            <li class="navbar-item account-menu px-0 mt-2 hover-overlay">
+              <a routerLink="/sliders" class="navbar-link d-flex align-items-center py-2 px-4">
+                <span class="h4 mb-0"><i class="uil uil-image"></i></span>
+                <h6 class="mb-0 ms-2">Slider</h6>
+              </a>
+            </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/sliders" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-syringe"></i></span>
-                  <h6 class="mb-0 ms-2">Slider</h6>
-                </a>
-              </li>
-
-              <li class="navbar-item account-menu px-0 mt-2 active">
-                <a routerLink="/new-redactor" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-file"></i></span>
-                  <h6 class="mb-0 ms-2">Dodaj nowego redaktora</h6>
-                </a>
-              </li>
+            <li class="navbar-item account-menu px-0 mt-2 " *ngIf="role == 'admin'">
+              <a routerLink="/new-redactor" class="navbar-link d-flex align-items-center py-2 px-4">
+                <span class="h4 mb-0"><i class="uil uil-user-plus"></i></span>
+                <h6 class="mb-0 ms-2">Dodaj / usuń redaktora</h6>
+              </a>
+            </li>
 
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a routerLink="/settings" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
-                  <h6 class="mb-0 ms-2">Ustawienia</h6>
-                </a>
-              </li>
+            <li class="navbar-item account-menu px-0 mt-2 active">
+              <a routerLink="/settings" class="navbar-link d-flex align-items-center py-2 px-4">
+                <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
+                <h6 class="mb-0 ms-2">Ustawienia</h6>
+              </a>
+            </li>
 
-              <li class="navbar-item account-menu px-0 mt-2">
-                <a  routerLink="/login"
-                    class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                  <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
-                  <h6 class="mb-0 ms-2">Wyloguj się</h6>
-                </a>
-              </li>
-            </ul>
-          </div>
+            <li class="navbar-item account-menu px-0 mt-2">
+              <a  routerLink="/login"
+                  class="navbar-link d-flex align-items-center py-2 px-4">
+                <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
+                <h6 class="mb-0 ms-2">Wyloguj się</h6>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-      <!--end col-->
-      <div class="col-lg-8 col-12 position-relative">
+    </div>
+    <!--end col-->
+
+    <div class="col-xl-10 col-lg-9 col-md-12 col-sm-12 position-relative mt-3">
+      <div class="pb-2">
+        <div class="d-inline-flex col-12 ">
+          <h4 class="col-8 ms-3 mt-1">Ustawienia</h4>
+
+        </div>
+        <div class="position-relative d-inline-flex col-8 ms-3">
+          <h6 class="text-muted mt-5">Admin </h6>
+          <h6 class="mt-5 ms-2">> Ustawienia</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="col-lg-12 col-12 position-relative">
         <div class="row">
-          <div class="col-md-6 mt-4 pt-2 ">
-            <div class="border-bottom">
-              <h5>Zmień dane</h5>
+          <div class="col-md-5 mt-4 pt-2 mx-3">
+            <div class="d-inline-flex col-12 ">
+              <h5 class="col-12">Zmień dane</h5>
             </div>
             <form class="login-form" [formGroup]="changeDataForm" #formData="ngForm" (ngSubmit)="changeData(formData)">
               <div class="row mt-4 ">
@@ -152,7 +135,7 @@
                   <div class="d-grid">
                     <div *ngIf="showSuccessName" class="alert alert-success" role="alert">
                       <b>Pomyślnie zmieniono dane.</b></div>
-                    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                    <button type="submit" class="btn" style="background-color: #26264f; color:white">Zapisz zmiany</button>
                   </div>
                 </div>
                 <!--end col-->
@@ -162,9 +145,9 @@
             </form>
           </div>
           <!--end col-->
-          <div class="col-md-6 mt-4 pt-2 ">
-            <div class="border-bottom">
-              <h5>Zmień hasło</h5>
+          <div class="col-md-5 mt-4 pt-2 mx-3">
+            <div class="d-inline-flex col-12 ">
+              <h5 class="col-12">Zmień hasło</h5>
             </div>
             <form class="login-form" [formGroup]="changePasswordForm" #form="ngForm" (ngSubmit)="changePassword(form)">
               <div class="row mt-4 ">
@@ -221,7 +204,7 @@
                     <span name="information_to_user" class="text-center text-danger">{{information_to_user}}</span>
                     <div *ngIf="showSuccessPassword" class="alert alert-success" role="alert">
                       <b>Twój hasło zostało zmienione.</b></div>
-                    <button type="submit" class="btn btn-primary">Zapisz hasło</button>
+                    <button type="submit" class="btn" style="background-color: #26264f; color:white">Zapisz hasło</button>
                   </div>
                 </div>
                 <!--end col-->
@@ -233,10 +216,8 @@
           <!--end col-->
         </div>
         <!--end row-->
-        <div class="mt-4">
-          <div class="border-bottom">
-            <h5 class="mb-2 text-danger">Usuń konto</h5>
-          </div>
+        <div class="mt-4 mx-3">
+          <h5 class="mb-3 text-danger">Usuń konto</h5>
 
           <div class="mt-2">
             <h6 class="mb-1">Chcesz usunąć swoje konto? Prosze kliknąć przycisk "Usuń konto" poniżej</h6>
@@ -253,131 +234,4 @@
     <!--end row-->
   </div>
   <!--end container-->
-
 </section>
-
-<section class="section">
-  <!--  <div class="container">-->
-  <!--    <div class="row">-->
-  <!--      <div class="col-lg-12">-->
-  <!--        <div class="features-absolute blog-search">-->
-  <!--          <div class="row justify-content-center">-->
-  <!--            <div class="col-md-10">-->
-  <!--              <div class="text-center subcribe-form">-->
-  <!--                <form style="max-width: 800px;">-->
-  <!--                  <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-  <!--                         placeholder="Search keywords...">-->
-  <!--                  <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-  <!--                </form>-->
-  <!--                &lt;!&ndash;end form&ndash;&gt;-->
-  <!--              </div>-->
-  <!--            </div>-->
-  <!--            &lt;!&ndash;end col&ndash;&gt;-->
-  <!--          </div>-->
-  <!--          &lt;!&ndash;end row&ndash;&gt;-->
-  <!--        </div>-->
-  <!--        &lt;!&ndash;end div&ndash;&gt;-->
-  <!--      </div>-->
-  <!--      &lt;!&ndash;end col&ndash;&gt;-->
-  <!--    </div>-->
-  <!--    &lt;!&ndash;end row&ndash;&gt;-->
-  <!--  </div>-->
-  <!--  &lt;!&ndash;end container&ndash;&gt;-->
-
-  <div class="container mt-100 mt-60 border-0 shadow rounded">
-    <div class="row align-items-center mb-4 pb-4">
-      <div class="col-md-3">
-        <div class="section-title text-md-left">
-          <h4 class="mb-4">Dodaj nowego redaktora</h4>
-
-        </div>
-      </div>
-      <!--end col-->
-
-      <!--      <form style="max-width: 100px;">-->
-      <!--        <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-      <!--               placeholder="Search keywords...">-->
-      <!--        <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-      <!--      </form>-->
-      <!--      <div class="row">-->
-      <!--        <div class="col-lg-3">-->
-      <!--          <div class="features-absolute blog-search">-->
-      <!--            <div class="row justify-content-center">-->
-      <!--              <div class="col-md-10">-->
-      <!--                <div class="text-center subcribe-form">-->
-      <!--                  <form style="max-width: 800px;">-->
-      <!--                    <input type="text" id="course" name="name" class="rounded-pill shadow-md bg-white"-->
-      <!--                           placeholder="Search keywords...">-->
-      <!--                    <button type="submit" class="btn btn-pills btn-primary">Search</button>-->
-      <!--                  </form>-->
-      <!--                  &lt;!&ndash;end form&ndash;&gt;-->
-      <!--                </div>-->
-      <!--              </div>-->
-      <!--              &lt;!&ndash;end col&ndash;&gt;-->
-      <!--            </div>-->
-      <!--            &lt;!&ndash;end row&ndash;&gt;-->
-      <!--          </div>-->
-      <!--          &lt;!&ndash;end div&ndash;&gt;-->
-      <!--        </div>-->
-      <!--        &lt;!&ndash;end col&ndash;&gt;-->
-      <!--      </div>-->
-      <!--end row-->
-
-    </div>
-    <!--end row-->
-    <div class="col-12 mt-4 pt-2">
-      <div class="text-center">
-        <a href="javascript:void(0)" class="btn btn-primary">See More <i-feather name="arrow-right" class="fea icon-sm">
-        </i-feather></a>
-      </div>
-    </div>
-    <!--end row-->
-  </div>
-  <!--end container-->
-</section>
-<!--end section-->
-<section class="main-slider" id="home">
-  <!--  <ngb-carousel class="slides" [showNavigationArrows]="showNavigationArrows"-->
-  <!--                [showNavigationIndicators]="showNavigationIndicators">-->
-  <!--    <ng-template ngbSlide>-->
-  <!--      <div class="bg-half-260 rounded-md" style="background: url('assets/images/blog/bg1.png') center center; background-size: cover">-->
-  <!--        <div class="rounded-md"></div>-->
-
-  <!--      </div>-->
-  <!--    </ng-template>-->
-  <!--    <ng-template ngbSlide>-->
-  <!--      <div class="bg-half-260 rounded-md" style="background: url('assets/images/blog/bg2.png') center center; background-size: cover;">-->
-  <!--        <div class="rounded-md"></div>-->
-  <!--      </div>-->
-  <!--    </ng-template>-->
-  <!--    <ng-template ngbSlide>-->
-  <!--      <div class="bg-half-260 rounded-md" style="background: url('assets/images/blog/bg3.png') center center; background-size: cover">-->
-  <!--        <div class="rounded-md"></div>-->
-  <!--      </div>-->
-  <!--    </ng-template>-->
-  <!--  </ngb-carousel>-->
-  <div class="container border-0 shadow rounded">
-    <div class="row">
-      <h4>Slider nr1</h4>
-      <div class="col-md-8 ">
-        <div class="bg-half-170 rounded-md" style="background: url('assets/images/blog/bg1.png') center center; background-size: cover">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-primary">Edytuj</button>
-      </div>
-    </div>
-
-
-
-  </div>
-
-
-</section>
-<!--end container-->
-<!-- Hero End -->
-<!--&lt;!&ndash; Back to top &ndash;&gt;-->
-<!--<a href="javascript: void(0);" class="btn btn-icon btn-primary back-to-top" id="back-to-top" [ngxScrollTo]="'#home'">-->
-<!--  <i-feather name="arrow-up" class="icons"></i-feather>-->
-<!--</a>-->
-<!--&lt;!&ndash; Back to top &ndash;&gt;-->

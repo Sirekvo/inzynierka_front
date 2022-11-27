@@ -1,4 +1,4 @@
-<table class=" table mb-0 table-center mt-3" [ngClass]="{'d-none': view == 1}">
+<table class=" table mb-0 table-center mt-3" [ngClass]="{'d-none': view == 1}" (window:resize)="onResize($event)">
     <thead>
     <tr>
         <th scope="col" class="border-bottom" style="width:3%;">#</th>
@@ -29,18 +29,19 @@
     </tr>
     </tbody>
 </table>
-<div class="row" [ngClass]="{'d-none': view == 2}">
+<div class="row" [ngClass]="{'d-none': view == 2}" (window:resize)="onResize($event)">
     <div class="col-xl-auto col-lg-auto col-md-6 col-6 mt-4 pt-2" *ngFor="let post of postList | orderBy: '-'">
         <div class="card blog rounded border-0 shadow">
-            <div class="position-relative">
-                <img [ngClass]="{'imgHeightWeb': web, 'imgHeightMobile': mobile}" src="{{post.url}}" class="card-img-top rounded-top center center imgHeightMobile imgHeightWeb">
+            <div class="position-relative" (click)="showPost(post.series_id)" ngbTooltip="Podgląd">
+                <img [ngClass]="{'imgHeightWeb': web, 'imgHeightMobile': mobile}" src="{{post.url}}" class="card-img-top rounded-top center center"
+                     >
                 <div class="overlay rounded-top bg-dark"></div>
             </div>
             <div class="card-body content">
                 <h5><a href="javascript:void(0)" class="card-title title text-dark">{{post.title}}</a>
                 </h5>
                 <div class="row post-meta d-flex justify-content-between position-relative mt-3" >
-                    <button type="button" class="btn btn-secondary col-md-6 col-12" (click)="editPost(post.series_id)" >Edytuj</button>
+                    <button type="button" class="btn btn-secondary col-md-6 col-12" (click)="editPost(post.series_id)">Edytuj</button>
                     <button type="button" class="btn btn-danger col-md-6 col-12" (click)="open('focusFirst', post.series_id)">Usuń</button>
                 </div>
             </div>

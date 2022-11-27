@@ -80,6 +80,9 @@ export class PostService {
 
         return this.httpClient_withoutToken.get<Array<CommentsInput>>(environment.apiUrl + '/comment/' + serie_id);
     }
+    deleteComment(comment_id: number): Observable<any>{
+        return this.httpClient_withoutToken.delete(environment.apiUrl + '/comment/' + comment_id)
+    }
     editSlider(url: string, slider_id: number): Observable<any>{
         const body ={
             url,

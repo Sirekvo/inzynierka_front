@@ -1516,7 +1516,7 @@ button:not(:disabled) {
   }
   #topnav .navigation-menu > li a:hover,
   #topnav .navigation-menu > li.has-submenu.open > a {
-    color: #2f55d4;
+    color: #26264f;
   }
   #topnav .menu-extras .menu-item {
     border-color: #8492a6;

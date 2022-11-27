@@ -26,6 +26,8 @@ export class PageBlogDetailComponent implements OnInit {
   submitted = false;
   commentForm: FormGroup;
   role = '';
+  post_creator: string;
+  date: string;
 
   commentsList: Array<CommentsInput>;
 
@@ -51,7 +53,8 @@ export class PageBlogDetailComponent implements OnInit {
           this.downloadUrl = post.url;
           this.genre = post.genre;
           this.premiere = post.premiere;
-
+          this.post_creator = post.post_creator;
+          this.date = post.creation_date;
         },
         () => {
         }
@@ -101,5 +104,12 @@ export class PageBlogDetailComponent implements OnInit {
       }else{
           this.router.navigate(['/admin']);
       }
+  }
+  deleteComment(id: number){
+      this.postService.deleteComment(id).subscribe(
+          (resolve) => {
+              this.ngOnInit()
+          }
+      )
   }
 }

@@ -82,9 +82,7 @@ export class PostEditionComponent implements OnInit {
   }
 
   async uploadImages() {
-    console.log(this.imgSrc);
     const filePath = `Images/${this.imgSrc['name']}`;
-    console.log(filePath);
     const fileRef = this.af.ref(filePath);
     this.task = this.af.upload(filePath, this.imgSrc);
     (await this.task).ref.getDownloadURL().then(url => {
@@ -104,7 +102,6 @@ export class PostEditionComponent implements OnInit {
         this.check=false;
         this.postService.editPost(this.id, form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl).subscribe(
             (response: any) => {
-              console.log("przeszlo!");
               this.router.navigate(['/admin']);
               this.resetForm();
               form.reset();
@@ -149,10 +146,6 @@ export class PostEditionComponent implements OnInit {
     this.isSubmitted = false;
     this.selectedImage = null;
     this.downloadUrl = '';
-
-
-
-    // this.lastPostId = this.postList.map(t => t.series_id);
 
   }
 }

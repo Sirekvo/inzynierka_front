@@ -17,6 +17,7 @@ export class PostInputById {
     premiere : string;
     description : string;
     url : string;
+    post_creator: string;
     creation_date: string;
 
 }

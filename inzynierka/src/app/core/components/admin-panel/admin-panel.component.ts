@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {PostInput, PostInputByTitle} from "../../../shared/models/post.model";
 import {PostService} from "../../../shared/services/post.service";
 import firebase from "firebase/compat";
@@ -6,16 +6,16 @@ import app = firebase.app;
 import {UrlInput} from "../../../shared/models/image.model";
 import {AccountOutput} from "../../../shared/models/user.model";
 import {UserService} from "../../../shared/services/user.service";
+import {debounceTime, map} from "rxjs/operators";
+import {fromEvent} from "rxjs";
 
 @Component({
     selector: 'app-admin-panel',
     templateUrl: './admin-panel.component.html',
-    styleUrls: ['./admin-panel.component.css']
+    styleUrls: ['./admin-panel.component.css'],
 })
 
-/***
- * Blog Component
- */
+
 export class AdminPanelComponent implements OnInit {
 
     /***
@@ -43,8 +43,9 @@ export class AdminPanelComponent implements OnInit {
     ngOnInit(): void {
         if (window.innerWidth <= 991) { // 768px portrait
             this.mobile = true;
+        }else{
+            this.mobile = false;
         }
-        window.onresize = () => this.mobile = window.innerWidth <= 991;
 
         this.postService.getPost().subscribe(
             (post: Array<PostInput>) => {
@@ -66,6 +67,14 @@ export class AdminPanelComponent implements OnInit {
             }
         )
 
+    }
+
+    onResize(event) {
+        if (event.target.innerWidth <= 991) { // 768px portrait
+            this.mobile = true;
+        }else{
+            this.mobile = false;
+        }
     }
     findByTitle(form){
         if(form.value.title){

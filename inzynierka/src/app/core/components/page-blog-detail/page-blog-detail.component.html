@@ -5,6 +5,8 @@
       <div class="col-lg-12 text-center">
         <div class="page-next-level">
           <h2>{{title}}</h2>
+          <span class="text-muted">{{post_creator}}</span>
+          <span class="text-muted"> {{date}}</span>
         </div>
       </div>
       <!--end col-->
@@ -58,7 +60,7 @@
                     </div>
                   </div>
                   <div class="mt-3">
-                    <button [ngClass]="{'d-none': role == ''}" class="btn btn-danger">Usuń</button>
+                    <button [ngClass]="{'d-none': role == ''}" class="btn btn-danger" (click)="deleteComment(comment.comment_id)">Usuń</button>
                   </div>
                 </div>
                 <div class="mt-3">
@@ -79,7 +81,7 @@
                 <div class="mb-3">
                   <label class="form-label">Nazwa<span class="text-danger">*</span></label>
                   <div class="form-icon position-relative">
-                    <i-feather name="user" class="fea icon-sm icons"></i-feather>
+                    <i-feather name="user" class="fea icon-sm icons d-flex"></i-feather>
                     <input  formControlName="name" type="text" placeholder="Nazwa" class="form-control ps-5"
                            [ngClass]="{ 'is-invalid': submitted && fComment.name.errors}">
                     <div *ngIf="submitted && fComment.name.errors" class="invalid-feedback">
@@ -94,7 +96,7 @@
                   <div class="mb-3">
                     <label class="form-label">Twój komentarz<span class="text-danger">*</span></label>
                     <div class="form-icon position-relative">
-                      <i-feather name="message-circle" class="fea icon-sm icons"></i-feather>
+                      <i-feather name="message-circle" class="fea icon-sm icons d-flex"></i-feather>
                       <textarea id="message" placeholder="Twój komentarz" rows="5" formControlName="comment"
                         class="form-control ps-5" [ngClass]="{ 'is-invalid': submitted && fComment.comment.errors }"></textarea>
                       <div *ngIf="submitted && fComment.comment.errors" class="invalid-feedback">

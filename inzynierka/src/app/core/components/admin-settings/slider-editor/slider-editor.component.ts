@@ -7,6 +7,8 @@ import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/compat/st
 import {UrlInput} from "../../../../shared/models/image.model";
 import {SlidersComponent} from "../../../../shared/sliders/sliders.component";
 import {Router} from "@angular/router";
+import {AccountOutput} from "../../../../shared/models/user.model";
+import {UserService} from "../../../../shared/services/user.service";
 
 @Component({
     selector: 'app-slider-editor',
@@ -36,12 +38,14 @@ export class SliderEditorComponent implements OnInit {
     isVisibleAddSlider= false;
     information_to_user= '';
     slidersCount: number;
-     sliderList: Array<UrlInput>;
-
+    sliderList: Array<UrlInput>;
+    mobile = false;
+    role: string;
 
     constructor(private postService: PostService,
                 private af:AngularFireStorage,
-                private router: Router) { }
+                private router: Router,
+                private userService: UserService) { }
 
     ngOnInit(): void {
         this.postService.getSliderUrl().subscribe(
@@ -51,9 +55,25 @@ export class SliderEditorComponent implements OnInit {
             },
             () => {
             }
-
         );
+        this.userService.getInformationAboutUser().subscribe(
+            (information: AccountOutput) => {
+                this.role = information.role;
+            }
+        )
+        if (window.innerWidth <= 991) { // 768px portrait
+            this.mobile = true;
+        }else{
+            this.mobile = false;
+        }
 
+    }
+    onResize(event) {
+        if (event.target.innerWidth <= 991) { // 768px portrait
+            this.mobile = true;
+        }else{
+            this.mobile = false;
+        }
     }
     show_add_slider(){
         if(this.slidersCount<3){

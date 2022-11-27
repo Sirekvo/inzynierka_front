@@ -1,16 +1,14 @@
 <!-- Hero Start -->
-<div *ngIf="mobile" class="back-to-home rounded">
+<div *ngIf="mobile" class="back-to-home rounded mx-4">
   <div class="btn-group dropdown-primary" ngbDropdown>
-    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
+    <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle
             aria-haspopup="true" aria-expanded="false">
       Menu
     </button>
     <div class="dropdown-menu " ngbDropdownMenu>
-      <a class="dropdown-item" style="background: #337ab7; color: white" routerLink="/main">Profil</a>
-      <a class="dropdown-item">Dodaj nowego redaktora</a>
-      <a class="dropdown-item" routerLink="/blood">Wyniki krwi</a>
-      <a class="dropdown-item bg-soft-secondary">Pełna teczka badań</a>
-      <a class="dropdown-item bg-soft-secondary">Kalendarz wizyt</a>
+      <a class="dropdown-item" style="background: #26264f; color: white" routerLink="/admin">Wszystkie posty</a>
+      <a class="dropdown-item" routerLink="/sliders">Slider</a>
+      <a class="dropdown-item" routerLink="/new-redactor" *ngIf="role == 'admin'">Dodaj / usuń redaktora</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" routerLink="/settings">Ustawienia</a>
       <a class="dropdown-item"  routerLink="/login"><b>Wyloguj się</b></a>
@@ -18,64 +16,38 @@
   </div>
 </div>
 
-<!--<section class="bg-profile d-table w-100 bg-dark mb-5" style="background: url('assets/images/blog/bg.png') center center;">-->
-<!--  <div class="container">-->
-<!--    <div class="row">-->
-<!--      <div class="col-lg-12">-->
-<!--        <div class="public-profile card rounded shadow-sm">-->
-<!--          <div class="card-body">-->
-<!--            <div class="col-lg-12 col-md-12">-->
-<!--              <div class="row align-items-end">-->
-<!--              <h2 class="text-center">Panel administratorski</h2>-->
-<!--                &lt;!&ndash;end col&ndash;&gt;-->
-<!--              </div>-->
-<!--              &lt;!&ndash;end row&ndash;&gt;-->
-<!--            </div>-->
-<!--            &lt;!&ndash;end row&ndash;&gt;-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      &lt;!&ndash;end col&ndash;&gt;-->
-<!--    </div>-->
-<!--    &lt;!&ndash;end row&ndash;&gt;-->
-<!--  </div>-->
-<!--  &lt;!&ndash;ed container&ndash;&gt;-->
-<!--</section>-->
-<!--end section-->
-<!-- Hero End -->
-
 <!-- Profile Start -->
-<section class="section">
+<section class="section" (window:resize)="onResize($event)">
   <div class="row">
     <div class="col-xl-2 col-lg-3 col-md-4 col-4 d-lg-block d-none" style="background-color: #1d1e42; min-height: 100vh">
-      <div class=" px-4 sticky-bar rounded shadow">
+      <div class=" px-4 sticky-bar">
         <div class="widget">
           <h3 class="text-white mt-3 ps-4">Admin panel</h3>
           <ul class="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
             <li class="navbar-item account-menu px-0 active">
-              <a routerLink="/admin" class="navbar-link d-flex rounded align-items-center py-2 px-4">
+              <a routerLink="/admin" class="navbar-link d-flex align-items-center py-2 px-4">
                 <span class="h4 mb-0"><i class="uil uil-create-dashboard"></i></span>
                 <h6 class="mb-0 ms-2 ">Wszystkie posty</h6>
               </a>
             </li>
 
             <li class="navbar-item account-menu px-0 mt-2 hover-overlay">
-              <a routerLink="/sliders" class="navbar-link d-flex rounded align-items-center py-2 px-4">
+              <a routerLink="/sliders" class="navbar-link d-flex align-items-center py-2 px-4">
                 <span class="h4 mb-0"><i class="uil uil-image"></i></span>
                 <h6 class="mb-0 ms-2">Slider</h6>
               </a>
             </li>
 
             <li class="navbar-item account-menu px-0 mt-2" *ngIf="role == 'admin'">
-              <a routerLink="/new-redactor" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+              <a routerLink="/new-redactor" class="navbar-link d-flex align-items-center py-2 px-4">
                 <span class="h4 mb-0"><i class="uil uil-user-plus"></i></span>
-                <h6 class="mb-0 ms-2">Dodaj nowego redaktora</h6>
+                <h6 class="mb-0 ms-2">Dodaj / usuń redaktora</h6>
               </a>
             </li>
 
 
             <li class="navbar-item account-menu px-0 mt-2">
-              <a routerLink="/settings" class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+              <a routerLink="/settings" class="navbar-link d-flex align-items-center py-2 px-4">
                 <span class="h4 mb-0"><i class="uil uil-setting"></i></span>
                 <h6 class="mb-0 ms-2">Ustawienia</h6>
               </a>
@@ -83,7 +55,7 @@
 
             <li class="navbar-item account-menu px-0 mt-2">
               <a  routerLink="/login"
-                 class="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
+                 class="navbar-link d-flex align-items-center py-2 px-4">
                 <span class="h4 mb-0"><i class="uil uil-sign-out-alt"></i></span>
                 <h6 class="mb-0 ms-2">Wyloguj się</h6>
               </a>
@@ -94,57 +66,49 @@
     </div>
     <!--end col-->
 
-    <div class="col-xl-10 col-lg-9 col-md-8 col-sm-12 position-relative mt-3">
-      <div class="pb-4">
+    <div class="col-xl-10 col-lg-9 col-md-12 col-sm-12 position-relative mt-3">
+      <div class="pb-2">
         <div class="d-inline-flex col-12 ">
-          <h4 class="col-8 ms-3">Wszystkie posty</h4>
+          <h4 class="col-8 ms-3 mt-1">Wszystkie posty</h4>
 
         </div>
-        <div class="position-absolute mt-4" style="right: 2em">
-          <!--        <button [ngxScrollTo]="'#contact'" [ngxScrollToDuration]="'0'"-->
-          <!--                class="h3 text-primary bg-white border-0 p-0 m-0"-->
-          <!--                ngbTooltip="Dodaj nowy post">-->
-          <!--          <i class="uil uil-plus"></i>-->
-          <!--        </button>-->
-          <a  class="btn btn-soft-primary mt-3">Nowy post
-            <i-feather name="arrow-right" class="fea icon-sm"></i-feather>
-          </a>
-        </div>
-        <div class="position-relative d-inline-flex col-6 ms-3">
+        <div class="position-relative d-inline-flex col-8 ms-3">
           <h6 class="text-muted mt-5">Admin </h6>
           <h6 class="mt-5 ms-2">> Wszystkie posty</h6>
         </div>
-
-      </div>
+     </div>
       <hr>
-
-      <div class="col-md-6 btn-group btn-group-toggle rounded d-flex m-auto" data-toggle="buttons">
-        <label class="btn btn-light" [ngClass]="{'active': activeToggle==1}">
-          <input type="radio" id="compact" value='compact' autocomplete="off" [checked]="checked"
-                 (click)=checkSelected() >
-          Widok kompaktowy
-        </label>
-        <label class="btn btn-light" [ngClass]="{'active': activeToggle==2}">
-          <input type="radio" id="details" value='details' autocomplete="off" [checked]="checked2"
-                 (click)=checkSelected2() >
-          Widok szczegółowy
-        </label>
-      </div>
-
-      <div class="col-md-10 mt-3 m-auto">
-        <div class=" blog-search">
-          <div class="row justify-content-center">
-            <div class="text-center subcribe-form">
-              <form #f=ngForm (keyup)="findByTitle(f)">
-                <input type="text" name="title" class="rounded-pill shadow-md bg-white"
-                       placeholder="Szukaj po tytule..." ngModel>
-                <button type="submit" class="btn btn-pills btn-primary">Szukaj</button>
-              </form>
+      <div class="col-md-12 col-12 d-inline-flex position-relative">
+        <div class="d-inline-flex col-auto mt-2">
+          <a (click)="checkSelected()" class="btn ms-1" ngbTooltip="Widok kompaktowy">
+            <span class="h4"><i class="uil uil-apps" [ngClass]="{'custom-icon': activeToggle == 1}"></i></span>
+          </a>
+          <a (click)="checkSelected2()" class="btn ps-1" ngbTooltip="Widok szczegółowy">
+            <span class="h4"><i class="uil uil-list-ul" [ngClass]="{'custom-icon': activeToggle == 2}"></i></span>
+          </a>
+        </div>
+        <div class="col-md-3 col-5 mt-3">
+          <form #f=ngForm (keyup)="findByTitle(f)">
+            <div class="form-icon position-relative">
+              <i-feather name="edit2" class="fea icon-sm icons d-flex"></i-feather>
+              <input type="text" name="title" class="form-control ps-5 pt-2 border-dark"
+                     placeholder="Szukaj po tytule..." ngModel>
             </div>
-          </div>
+          </form>
+        </div>
+        <div class="position-absolute col-auto" style="right: 2em">
+          <a routerLink="/post-creator" class="btn mt-3" style="background-color: #26264f; color: white;" [ngClass]="{'d-none': mobile == true}">Nowy post
+            <i-feather name="arrow-right" class="fea icon-sm"></i-feather>
+          </a>
+          <button [ngClass]="{'d-none': mobile == false}"
+                  class="h3 text-dark bg-white border-0 mt-3"
+                  ngbTooltip="Dodaj nowy post" routerLink="/post-creator">
+            <i class="uil uil-plus"></i>
+          </button>
         </div>
       </div>
-      <div class="col-xl-12">
+
+      <div class="col-xl-12 mx-3">
         <app-blog-admin [postList]="postList" [view]="activeToggle"></app-blog-admin>
       </div>
 

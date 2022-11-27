@@ -42,5 +42,19 @@ export class BlogComponent implements OnInit {
     showPost(id: number){
         this.router.navigate(['/post-detail', id]);
     }
-
+    onResize(event) {
+        if (event.target.innerWidth <= 991) { // 768px portrait
+            this.web = false;
+            this.mobile = true;
+            if(this.howMany==3){
+                this.howMany=2;
+            }
+        }else{
+            this.web = true;
+            this.mobile = false;
+            if(this.howMany==2){
+                this.howMany=3;
+            }
+        }
+    }
 }

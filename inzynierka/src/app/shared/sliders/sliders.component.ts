@@ -11,16 +11,14 @@ import {UrlInput} from "../models/image.model";
     selector: 'ngbd-modal-confirm',
     template: `
       <div class="modal-header">
-        <h4 class="modal-title" id="modal-title">Usuwanie konta</h4>
+        <h4 class="modal-title" id="modal-title">Usuwanie slidera</h4>
         <button type="button" class="btn-close" aria-describedby="modal-title"
                 (click)="modal.dismiss('Cross click')"></button>
       </div>
       <div class="modal-body">
-        <p><strong>Czy na pewno chcesz usunąć swój profil z <span class="text-primary">Teczki Życia</span> ?</strong>
+        <p><strong>Czy na pewno chcesz usunąć te zdjęcie?</strong>
         </p>
-        <p>Wszystkie informacje przypisane do tego konta zostaną usunięte.
-          <span class="text-danger">Tej operacji nie można cofnąć.</span>
-        </p>
+        <span class="text-danger">Tej operacji nie można cofnąć.</span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Anuluj</button>
@@ -52,6 +50,7 @@ export class SlidersComponent implements OnInit {
         url: string;
         slider_id: number;
     }>;
+    @Input() slidersCount: number;
 
 
     isVisible = true;
@@ -62,6 +61,8 @@ export class SlidersComponent implements OnInit {
     tmpUrl: string;
     task: AngularFireUploadTask;
     selectedImage : any = null;
+    information_to_user= '';
+    isVisibleAddSlider= false;
     // postList: Array<PostInput>;
 
 
@@ -74,16 +75,6 @@ export class SlidersComponent implements OnInit {
                 ) { }
 
     ngOnInit(): void {
-
-
-        // this.postService.getPost().subscribe(
-        //     (post: Array<PostInput>) => {
-        //       this.postList = post;
-        //     },
-        //     () => {
-        //     }
-        //
-        // );
     }
     counter(i : number){
         return new Array(i);
@@ -94,6 +85,14 @@ export class SlidersComponent implements OnInit {
         }
         this.isVisible = true;
         this.isVisibleEdit = false;
+        this.downloadUrl = '';
+    }
+    back_to_start2(url){
+        if(url != undefined){
+            this.af.refFromURL(url).delete();
+        }
+        this.isVisibleAddSlider = false;
+        this.isVisible = true;
         this.downloadUrl = '';
     }
     open(name: string, id: number, url: string) {
@@ -153,6 +152,20 @@ export class SlidersComponent implements OnInit {
             this.downloadUrl = '';
         }
 
+    }
+    submit_add(){
+        const slider = new UrlInput();
+        slider.url = this.downloadUrl;
+        this.urlList.push(slider);
+        this.postService.sendSliderUrl(this.urlList).subscribe(
+            (resolve) =>{
+                this.isVisibleAddSlider = false;
+                this.isVisible = true;
+                this.downloadUrl = '';
+                this.ngOnInit();
+            }
+
+        )
     }
     showPreview(event: any){
         if(event.target.files && event.target.files[0]){
@@ -224,5 +237,14 @@ export class SlidersComponent implements OnInit {
             )
         }
 
+    }
+    show_add_slider(){
+        if(this.slidersCount<3){
+            this.isVisible = false;
+            this.isVisibleAddSlider = true;
+        }
+        else{
+            this.information_to_user = 'Możesz dodać maksymalnie 3 slidery';
+        }
     }
 }

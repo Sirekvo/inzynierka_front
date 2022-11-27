@@ -384,6 +384,10 @@ video:focus {
     color: #fff !important;
     box-shadow: 0 3px 5px 0 rgba(47, 85, 212, 0.3)
 }
+.btn-custom{
+    background-color: #1d1e42;
+    color:white;
+}
 
 .btn-secondary {
     background-color: #5a6d90 !important;

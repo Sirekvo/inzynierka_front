@@ -204,7 +204,7 @@ export class PageBlogDetailTwoComponent implements OnInit {
              },
              () => {
                this.check=false;
-               this.af.refFromURL(this.downloadUrl).delete();
+
              }
          );
 
@@ -269,6 +269,13 @@ export class PageBlogDetailTwoComponent implements OnInit {
         );
     // this.lastPostId = this.postList.map(t => t.series_id);
 
+  }
+  back() {
+    if(this.downloadUrl != ''){
+      this.af.refFromURL(this.downloadUrl).delete();
+    }
+
+    this.router.navigate(['/admin'])
   }
 
 }

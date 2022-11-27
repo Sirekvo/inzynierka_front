@@ -78,6 +78,7 @@ export class AccountSettingsComponent implements OnInit {
     role: string;
     information_to_user = '';
     information_to_user2 = '';
+    mobile = false;
 
     constructor(private userService: UserService,
                 private formBuilder: FormBuilder,
@@ -111,6 +112,11 @@ export class AccountSettingsComponent implements OnInit {
                 this.changeDataForm.controls['lastname'].setValue(this.lastname);
             }
         )
+        if (window.innerWidth <= 991) { // 768px portrait
+            this.mobile = true;
+        }else{
+            this.mobile = false;
+        }
     }
     get fChangePassword(){
         return this.changePasswordForm.controls;
@@ -140,7 +146,13 @@ export class AccountSettingsComponent implements OnInit {
             )
         }
     }
-
+    onResize(event) {
+        if (event.target.innerWidth <= 991) { // 768px portrait
+            this.mobile = true;
+        }else{
+            this.mobile = false;
+        }
+    }
     changeData(form){
         this.submitted_data = true;
 
