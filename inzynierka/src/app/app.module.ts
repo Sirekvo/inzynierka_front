@@ -62,6 +62,7 @@ import {AccountSettingsComponent} from "./core/components/account-settings/accou
 import {BlogComponent} from "./shared/blog/blog.component";
 import {CommonModule} from "@angular/common";
 import {HeaderComponent} from "./shared/header/header.component";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -123,7 +124,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     NgPipesModule,
-    CommonModule
+    CommonModule,
+    NgxPaginationModule,
 
   ],
   exports: [

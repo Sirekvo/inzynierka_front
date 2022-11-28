@@ -20,7 +20,7 @@ export class PostService {
         return this.httpClient_withoutToken.get<Array<PostInput>>(environment.apiUrl + '/series');
     }
 
-    createPost(title: string, creator: string, genre: string, production: string, premiere: string, description: string, url: string): Observable<any> {
+    createPost(title: string, creator: string, genre: string, production: string, premiere: string, description: string, url: string,post_creator: string, creation_date: string): Observable<any> {
 
         const body = {
             title,
@@ -29,7 +29,9 @@ export class PostService {
             production,
             premiere,
             description,
-            url
+            url,
+            post_creator,
+            creation_date
         };
         return this.httpClient_withoutToken.post(environment.apiUrl + '/series', body);
     }
@@ -43,7 +45,8 @@ export class PostService {
             production,
             premiere,
             description,
-            url
+            url,
+
         };
 
         return this.httpClient_withoutToken.put(environment.apiUrl + '/change-post', body);

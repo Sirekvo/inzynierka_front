@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {PostInput} from "../models/post.model";
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {CommentsInput, PostInput} from "../models/post.model";
 import {PostService} from "../services/post.service";
 import {Router} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @Component({
     selector: 'app-blog',
@@ -21,10 +22,17 @@ export class BlogComponent implements OnInit {
         url: string;
     }>;
     @Input() howMany: number;
-
-
+    @Output() pageChange: EventEmitter<number>;
+    @Output() pageBoundsCorrection: EventEmitter<number>;
+    page=1;
+    pagesize=6;
     web = true;
     mobile = false;
+    shouldDoIt = true;
+    commentsCounter = 0;
+    colleges: any[] = [{ name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }, { name: "5" }, { name: "6" }, { name: "7" }, { name: "8" }, { name: "9" }, { name: "10" }, { name: "11" }, { name: "12" }, { name: "13" }];
+
+    filteredArray: any[] = []
 
     constructor(private postService: PostService,
                 private router: Router) { }
@@ -38,6 +46,7 @@ export class BlogComponent implements OnInit {
             }
         }
         window.onresize = () => this.mobile = window.innerWidth <= 991;
+
     }
     showPost(id: number){
         this.router.navigate(['/post-detail', id]);
@@ -56,5 +65,22 @@ export class BlogComponent implements OnInit {
                 this.howMany=3;
             }
         }
+    }
+
+
+    callFunction(id: number) {
+        console.log(id);
+        this.postService.getComments(id).subscribe(
+            (post: Array<CommentsInput>) => {
+                this.commentsCounter = post.length;
+                return this.commentsCounter;
+            },
+            () => {
+            }
+
+        );
+    }
+    onPaginateChange(data) {
+        this.filteredArray = this.colleges.slice(0, data.pageSize);
     }
 }

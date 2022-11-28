@@ -21,14 +21,17 @@ export class IndexBlogComponent implements OnInit {
   urlList: Array<UrlInput>;
   three = 3;
   slider_count: number;
+  howManyPage: number;
+  page = 1;
 
-
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService) {
+  }
 
   ngOnInit(): void {
       this.postService.getPost().subscribe(
           (post: Array<PostInput>) => {
               this.postList = post;
+              this.howManyPage = Math.round(this.postList.length/6)+1;
           },
           () => {
           }
@@ -43,6 +46,13 @@ export class IndexBlogComponent implements OnInit {
           }
 
       );
+      // for(let i =1; i<=this.howManyPage; i++) {
+      //     this.pageList.push(i);
+      // }
+
   }
+    counter(i: number) {
+        return new Array(i);
+    }
 
 }

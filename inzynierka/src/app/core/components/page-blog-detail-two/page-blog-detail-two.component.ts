@@ -5,11 +5,13 @@ import {PostService} from "../../../shared/services/post.service";
 import {delay, finalize} from "rxjs/operators";
 import {ImageService} from "../../../shared/services/image.service";
 import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/compat/storage";
-import {ModalDismissReasons, NgbActiveModal, NgbDateStruct, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ModalDismissReasons, NgbActiveModal, NgbDate, NgbDateStruct, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import * as _ from 'lodash';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {AccountOutput} from "../../../shared/models/user.model";
+import {UserService} from "../../../shared/services/user.service";
 
 @Component({
   selector: 'ngbd-modal-confirm',
@@ -155,17 +157,27 @@ export class PageBlogDetailTwoComponent implements OnInit {
   imageUrl: string;
   downloadUrl: string;
   task: AngularFireUploadTask;
-
+  name: string;
+  lastname: string;
 
 
   constructor(private postService: PostService,
               private af:AngularFireStorage,
               private imageService: ImageService,
               private _modalService: NgbModal,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.resetForm();
+    this.userService.getInformationAboutUser().subscribe(
+        (information: AccountOutput) => {
+          this.name = information.name;
+          this.lastname = information.lastname;
+        }
+    )
+    const now = new Date();
+    this.model = new NgbDate(now.getFullYear(),now.getMonth(),now.getDate());
 
   }
 
@@ -190,26 +202,23 @@ export class PageBlogDetailTwoComponent implements OnInit {
   // async onSubmit(form: any) {
    onSubmit = async (form: any) =>{
     const new_date = form.value.premiere.year + "-" + form.value.premiere.month + "-" + form.value.premiere.day;
+    const post_creator = this.name + ' ' + this.lastname;
+    const now = new Date();
+    const creation_date = now.getDate() + '.' + now.getMonth() + '.' + now.getFullYear();;
 
-
-     while(this.check == true){
-       if(this.downloadUrl != '')
-       {
+    this.check=false;
+    this.postService.createPost(form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl, post_creator, creation_date).subscribe(
+       (response: any) => {
+         this.router.navigate(['/admin'])
+         this.resetForm();
+         form.reset();
+       },
+       () => {
          this.check=false;
-         this.postService.createPost(form.value.title, form.value.creator, form.value.genre, form.value.production, new_date, form.value.description, this.downloadUrl).subscribe(
-             (response: any) => {
-               this.router.navigate(['/admin'])
-               this.resetForm();
-               form.reset();
-             },
-             () => {
-               this.check=false;
-
-             }
-         );
 
        }
-     }
+    );
+
 
     this.isSubmitted = true;
 
