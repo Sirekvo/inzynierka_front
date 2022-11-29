@@ -19,19 +19,21 @@
     </div>
   </div>
 </div>
-<!--<ngb-pagination [collectionSize]="postList.length" [(page)]="page" [(pageSize)]="pagesize" [rotate]="true">-->
-<!--</ngb-pagination>-->
+
 <!--&lt;!&ndash;orderBy: '-' |&ndash;&gt;-->
-<div class="d-flex">
-  <pagination-controls  id="some_id"
-                        (pageChange)="page = $event"
-                        maxSize="9"
-                        directionLinks="true"
-                        responsive="true"
-                        previousLabel="Previous"
-                        nextLabel="Next"
-                        screenReaderPaginationLabel="Pagination"
-                        screenReaderPageLabel="page"
-                        screenReaderCurrentLabel="You're on page">
-  </pagination-controls>
+<div class="d-flex" *ngIf="howMany>3">
+  <ngb-pagination [collectionSize]="postList.length" [(page)]="page" [(pageSize)]="pagesize" [rotate]="true"
+  class="mx-auto mt-5 mb-5">
+  </ngb-pagination>
+<!--  <pagination-controls  id="some_id"-->
+<!--                        (pageChange)="page = $event"-->
+<!--                        maxSize="9"-->
+<!--                        directionLinks="true"-->
+<!--                        responsive="true"-->
+<!--                        previousLabel="Previous"-->
+<!--                        nextLabel="Next"-->
+<!--                        screenReaderPaginationLabel="Pagination"-->
+<!--                        screenReaderPageLabel="page"-->
+<!--                        screenReaderCurrentLabel="You're on page">-->
+<!--  </pagination-controls>-->
 </div>
