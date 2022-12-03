@@ -8,11 +8,8 @@ import { combineLatest } from 'rxjs/internal/operators';
 import {MasterPageComponent} from "./core/components/master-page/master-page.component";
 import {PageBlogDetailComponent} from "./core/components/page-blog-detail/page-blog-detail.component";
 import {AuthLoginComponent} from "./auth/auth-login/auth-login.component";
-import {ImageComponent} from "./core/components/images/image/image.component";
-import {ImageListComponent} from "./core/components/images/image-list/image-list.component";
-import {ImagesComponent} from "./core/components/images/images.component";
 import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
-import {PageBlogDetailTwoComponent} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
+import {PostCreator} from "./core/components/post-creator/post-creator.component";
 import {PostEditionComponent} from "./core/components/post-edition/post-edition.component";
 import {SliderEditorComponent} from "./core/components/admin-settings/slider-editor/slider-editor.component";
 import {NewRedactorComponent} from "./core/components/admin-settings/new-redactor/new-redactor.component";
@@ -30,11 +27,7 @@ const routes: Routes = [
   },
   {path: 'login', component: AuthLoginComponent},
   {path: 'admin', component: AdminPanelComponent},
-  {path: 'post-creator', component: PageBlogDetailTwoComponent},
-  {path: 'image', component: ImagesComponent,children:[
-      {path:'upload', component: ImageComponent},
-      {path:'list', component: ImageListComponent}
-    ]},
+  {path: 'post-creator', component: PostCreator},
   {path: 'post-edition/:id', component:PostEditionComponent},
   {path: 'sliders', component: SliderEditorComponent},
   {path: 'new-redactor', component: NewRedactorComponent},

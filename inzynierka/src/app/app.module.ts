@@ -32,9 +32,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MasterPageComponent} from "./core/components/master-page/master-page.component";
 import {PageBlogDetailComponent} from "./core/components/page-blog-detail/page-blog-detail.component";
-import {PageBlogListSidebarComponent} from "./core/components/page-blog-list-sidebar/page-blog-list-sidebar.component";
-import {PageBlogSidebarComponent} from "./core/components/page-blog-sidebar/page-blog-sidebar.component";
-import {PageBlogListComponent} from "./core/components/page-blog-list/page-blog-list.component";
 import {AuthLoginComponent} from "./auth/auth-login/auth-login.component";
 import {UserService} from "./shared/services/user.service";
 import {AuthInterceptorProvider} from "./shared/interceptor/auth.interceptor";
@@ -43,14 +40,8 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
-import {ImageComponent} from "./core/components/images/image/image.component";
-import {ImageListComponent} from "./core/components/images/image-list/image-list.component";
-import {ImagesComponent} from "./core/components/images/images.component";
 import {AdminPanelComponent} from "./core/components/admin-panel/admin-panel.component";
-import {
-  NgbdModalConfirm,
-  PageBlogDetailTwoComponent
-} from "./core/components/page-blog-detail-two/page-blog-detail-two.component";
+import {PostCreator} from "./core/components/post-creator/post-creator.component";
 import {PostService} from "./shared/services/post.service";
 import {NgPipesModule} from "ngx-pipes";
 import {BlogAdminComponent} from "./shared/blog-admin/blog-admin.component";
@@ -74,20 +65,13 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   declarations: [
     MasterPageComponent,
     PageBlogDetailComponent,
-    PageBlogDetailTwoComponent,
-    PageBlogListSidebarComponent,
-    PageBlogSidebarComponent,
-    PageBlogListComponent,
+    PostCreator,
     AuthLoginComponent,
     AppComponent,
     FooterComponent,
     HeaderComponent,
     IndexBlogComponent,
-    ImagesComponent,
-    ImageComponent,
-    ImageListComponent,
     AdminPanelComponent,
-    NgbdModalConfirm,
     BlogAdminComponent,
     BlogComponent,
     PostEditionComponent,

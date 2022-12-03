@@ -24,16 +24,11 @@
 <div class="d-flex" *ngIf="howMany>3">
   <ngb-pagination [collectionSize]="postList.length" [(page)]="page" [(pageSize)]="pagesize" [rotate]="true"
   class="mx-auto mt-5 mb-5">
+    <ng-template ngbPaginationFirst>First</ng-template>
+    <ng-template ngbPaginationLast>Last</ng-template>
+    <ng-template ngbPaginationPrevious>Prev</ng-template>
+    <ng-template ngbPaginationNext>Next</ng-template>
+    <ng-template ngbPaginationEllipsis>...</ng-template>
+    <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
   </ngb-pagination>
-<!--  <pagination-controls  id="some_id"-->
-<!--                        (pageChange)="page = $event"-->
-<!--                        maxSize="9"-->
-<!--                        directionLinks="true"-->
-<!--                        responsive="true"-->
-<!--                        previousLabel="Previous"-->
-<!--                        nextLabel="Next"-->
-<!--                        screenReaderPaginationLabel="Pagination"-->
-<!--                        screenReaderPageLabel="page"-->
-<!--                        screenReaderCurrentLabel="You're on page">-->
-<!--  </pagination-controls>-->
 </div>
