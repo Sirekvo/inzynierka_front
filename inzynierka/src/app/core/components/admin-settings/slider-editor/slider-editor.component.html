@@ -8,7 +8,7 @@
     <div class="dropdown-menu " ngbDropdownMenu>
       <a class="dropdown-item" routerLink="/admin">Wszystkie posty</a>
       <a class="dropdown-item" style="background: #26264f; color: white"  routerLink="/sliders">Slider</a>
-      <a class="dropdown-item" routerLink="/new-redactor" *ngIf="role == 'admin'">Dodaj / usuń redaktora</a>
+      <a class="dropdown-item" routerLink="/new-redactor" *ngIf="role == 'admin' || role == 'super_admin'">Dodaj / usuń redaktora</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" routerLink="/settings">Ustawienia</a>
       <a class="dropdown-item"  routerLink="/login"><b>Wyloguj się</b></a>
@@ -38,7 +38,7 @@
               </a>
             </li>
 
-            <li class="navbar-item account-menu px-0 mt-2" *ngIf="role == 'admin'">
+            <li class="navbar-item account-menu px-0 mt-2" *ngIf="role == 'admin' || role == 'super_admin'">
               <a routerLink="/new-redactor" class="navbar-link d-flex align-items-center py-2 px-4">
                 <span class="h4 mb-0"><i class="uil uil-user-plus"></i></span>
                 <h6 class="mb-0 ms-2">Dodaj / usuń redaktora</h6>

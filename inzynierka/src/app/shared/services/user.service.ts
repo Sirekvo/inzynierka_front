@@ -74,7 +74,7 @@ export class UserService {
             password,
             newPassword
         };
-        return this.httpClient.put(environment.apiUrl + '/change-password', body);
+        return this.httpClient.post(environment.apiUrl + '/change-password', body);
     }
 
     changeInformation(email: string, name: string, lastname: string): Observable<any> {

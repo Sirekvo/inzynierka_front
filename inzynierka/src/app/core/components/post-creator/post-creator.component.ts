@@ -72,11 +72,9 @@ export class PostCreator implements OnInit {
 
   async uploadImages() {
     console.log(this.imgSrc);
-    // this.postList.map(t => t.series_id)
     const filePath = `Images/${this.imgSrc['name']}`;
     console.log(filePath);
     const fileRef = this.af.ref(filePath);
-    // this.af.upload("/files"+Math.random()+this.imgSrc,this.imgSrc)
     this.task = this.af.upload(filePath, this.imgSrc);
     (await this.task).ref.getDownloadURL().then(url => {
       this.downloadUrl = url
@@ -110,18 +108,6 @@ export class PostCreator implements OnInit {
 
 
     this.isSubmitted = true;
-
-    // var filePath = `${this.postList.map(t => t.series_id)[this.postList.length-1]+1}/${this.selectedImage.name}_${new Date().getTime()}`;
-    // const fileRef = this.storage.ref(filePath);
-    // this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
-    //     finalize(()=>{
-    //       fileRef.getDownloadURL().subscribe((url)=>{
-    //         this.imageUrl=url;
-    //         this.imageService.insertImageDatails(this.imageUrl);
-    //         this.resetForm();
-    //       })
-    //     })
-    // ).subscribe();
   }
 
   showPreview(event: any){

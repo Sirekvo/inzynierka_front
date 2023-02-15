@@ -38,7 +38,7 @@
               </a>
             </li>
 
-            <li class="navbar-item account-menu px-0 mt-2" *ngIf="role == 'admin'">
+            <li class="navbar-item account-menu px-0 mt-2" *ngIf="role == 'admin' || role == 'super_admin'">
               <a routerLink="/new-redactor" class="navbar-link d-flex align-items-center py-2 px-4">
                 <span class="h4 mb-0"><i class="uil uil-user-plus"></i></span>
                 <h6 class="mb-0 ms-2">Dodaj / usuń redaktora</h6>
@@ -109,7 +109,7 @@
       </div>
 
       <div class="col-xl-12 mx-3">
-        <app-blog-admin [postList]="postList" [view]="activeToggle"></app-blog-admin>
+        <app-blog-admin #adminComponent [postList]="postList" [view]="activeToggle"></app-blog-admin>
       </div>
 
 

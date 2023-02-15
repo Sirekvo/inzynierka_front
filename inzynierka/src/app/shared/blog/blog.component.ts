@@ -69,7 +69,6 @@ export class BlogComponent implements OnInit {
 
 
     callFunction(id: number) {
-        console.log(id);
         this.postService.getComments(id).subscribe(
             (post: Array<CommentsInput>) => {
                 this.commentsCounter = post.length;

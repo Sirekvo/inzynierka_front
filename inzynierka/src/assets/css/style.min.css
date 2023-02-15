@@ -665,7 +665,7 @@ video:focus {
 .btn-light {
     background-color: #f8f9fc !important;
     border: 1px solid #f8f9fc !important;
-    color: #fff !important;
+    color: #000000 !important;
     box-shadow: 0 3px 5px 0 rgba(248, 249, 252, 0.3)
 }
 

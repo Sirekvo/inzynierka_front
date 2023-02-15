@@ -3,6 +3,7 @@ import {PostInput, PostInputByTitle} from "../models/post.model";
 import {PostService} from "../services/post.service";
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AdminPanelComponent} from "../../core/components/admin-panel/admin-panel.component";
 
 @Component({
   selector: 'ngbd-modal-confirm',
@@ -52,13 +53,13 @@ export class BlogAdminComponent implements OnInit {
     url: string;
   }>;
   @Input() view: number;
-
   web = true;
   mobile = false;
 
   constructor(private postService: PostService,
               private router: Router,
-              private _modalService: NgbModal) { }
+              private _modalService: NgbModal,
+              private adminPanel: AdminPanelComponent) { }
 
   ngOnInit(): void {
     if (window.innerWidth <= 991) { // 768px portrait
@@ -76,7 +77,7 @@ export class BlogAdminComponent implements OnInit {
       if (result == 'Ok click') {
         this.postService.deletePost(id).subscribe(
             (result) => {
-              this.ngOnInit();
+              this.adminPanel.ngOnInit();
             },
         );
       }

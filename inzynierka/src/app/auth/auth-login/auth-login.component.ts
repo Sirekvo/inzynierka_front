@@ -29,23 +29,18 @@ export class AuthLoginComponent implements OnInit {
     }
 
     checkUser(form: any) {
-
         this.userService.login(form.value.email, form.value.password).subscribe(
             (data: TokenOutput) => {
-                this.userService.setLocalUser(data, form.value.remember === true);
-                this.router.navigate(['/admin'])
-                // if (data.firstLogin == true) {
-                //     this.router.navigate(['/starter']);
-                // } else if (data.firstLogin == false) {
-                //     this.router.navigate(['/main']);
-                // } else {
-                //     this.information_to_user = 'Niepoprawny email lub hasło';
-                //     form.reset();
-                // }
-
+                if(data.token == undefined){
+                    this.information_to_user = 'Niepoprawny email lub hasło';
+                }
+                else{
+                    this.userService.setLocalUser(data, form.value.remember === true);
+                    this.router.navigate(['/admin'])
+                }
             },
             () => {
-
+                this.information_to_user = 'Niepoprawny email lub hasło';
             });
     }
 }
